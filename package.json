@@ -1,0 +1,23 @@
+{
+  "name": "github-live-markdown-preview",
+  "version": "0.0.1",
+  "author": "Daiz <taneli.vatanen@gmail.com>",
+  "license": "MIT",
+  "description": "Preview your comments/issues/etc live on GitHub.",
+  "main": "lib/index.js",
+  "dependencies": {
+    "LiveScript": "~1.1.1",
+    "shelljs": "~0.1.4",
+    "clean-css": "~1.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Daiz-/GitHub-LiveMarkdown.git"
+  },
+  "keywords": [
+    "github",
+    "markdown",
+    "preview",
+    "live"
+  ]
+}
