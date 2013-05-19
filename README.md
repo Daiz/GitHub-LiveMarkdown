@@ -2,7 +2,7 @@
 
 This is a userscript that does exactly what it says on the tin: It adds a live preview underneath the markdown input in comments, issues, etc. A picture says more than a thousand words:
 
-![Demonstration](https://f.cloud.github.com/assets/3596343/523106/6cf633f6-c096-11e2-9256-7173ae4dcf25.png)
+![Demonstration](https://f.cloud.github.com/assets/3596343/523187/a867c3b8-c09c-11e2-8dcd-58404f0ab266.png)
 
 The Live Preview is enabled by default, updates in realtime and can be toggled on and off with the button in the text area.
 
