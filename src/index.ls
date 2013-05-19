@@ -11,19 +11,17 @@ d = document
 
 # settings
 show-preview = local-storage.get-item \LiveMarkdownPreview
-if show-preview == null then show-preview = true
-show-preview = switch show-preview
-| "true"  => true
-| "false" => false
+show-preview ?= 'true'
+show-preview = if show-preview is 'true' then true else false
 
 # toggle preview on / off
 toggle-preview = !->
   it.prevent-default!
-  show-preview := !show-preview
-  local-storage.set-item \LiveMarkdownPreview, show-preview
-  if show-preview then
+  !:=show-preview
+  local-storage.set-item \LiveMarkdownPreview show-preview
+  if show-preview
     preview-bucket.class-list.remove \preview-hidden
-    text = textarea.value || 'Nothing to preview'
+    text = textarea.value or 'Nothing to preview'
     preview.innerHTML = marked text
   else preview-bucket.class-list.add \preview-hidden
 
@@ -75,8 +73,8 @@ if not show-preview then preview-bucket.class-list.add \preview-hidden
 content.append-child preview-bucket
 
 update-preview = !->
-  text = it.target.value || 'Nothing to preview'
-  if show-preview then
+  text = it.target.value or 'Nothing to preview'
+  if show-preview
     preview.innerHTML = marked text
 
 # add event listener for keyup
