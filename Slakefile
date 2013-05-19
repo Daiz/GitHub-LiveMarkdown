@@ -7,16 +7,8 @@ require! {
 
 pkg = JSON.parse cat 'package.json'
 
-compile = !->
-  file = cat it
-  file = lsc.compile file
-  target = it.replace \src \lib .replace \.ls \.js
-  file .to target
-
-task \compile 'Compile src/*.ls to src/*.js.' !->
-  [compile .. for ls 'src/*.ls']
-
 task \build 'Build the userscript.' !->
+
   cd \src # move to source directory
   head = cat 'header.js'
   body = lsc.compile (cat 'index.ls'), {+bare}
@@ -53,6 +45,7 @@ task \build 'Build the userscript.' !->
   console.log 'Build successful!'
 
 task \watch 'Watch files for change and compile.' !->
+
   do action = !->
     invoke \build
 
