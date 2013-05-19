@@ -6,7 +6,26 @@ marked.set-options do
   highlight: ->
     hljs.highlight-auto it .value
 
+# shortcuts
 d = document
+
+# settings
+show-preview = local-storage.get-item \LiveMarkdownPreview
+if show-preview == null then show-preview = true
+show-preview = switch show-preview
+| "true"  => true
+| "false" => false
+
+# toggle preview on / off
+toggle-preview = !->
+  it.prevent-default!
+  show-preview := !show-preview
+  local-storage.set-item \LiveMarkdownPreview, show-preview
+  if show-preview then
+    preview-bucket.class-list.remove \preview-hidden
+    text = textarea.value || 'Nothing to preview'
+    preview.innerHTML = marked text
+  else preview-bucket.class-list.add \preview-hidden
 
 # find the important elements
 content = d.query-selector \.write-content
@@ -18,6 +37,7 @@ button = d.create-element \a
   ..class-name = 'js-toggle-live-preview tooltipped leftwards'
   ..href = \#
   ..set-attribute \original-title 'Live Preview'
+  ..add-event-listener \click, toggle-preview, false
 
 # create the button icon
 icon = d.create-element \span
@@ -47,17 +67,17 @@ content.insert-before button, content.first-child
 d.body.append-child js
 
 # create preview element
-preview = d.create-element 'div'
-  ..class-name = 'comment-body markdown-body'
-preview-wrapper = d.create-element 'div'
-  ..class-name = \comment-content
-  ..append-child preview
+preview-bucket = d.query-selector \.preview-content
+  .child-nodes.1.clone-node true
+preview = preview-bucket.query-selector \.comment-body
 
-content.append-child preview-wrapper
+if not show-preview then preview-bucket.class-list.add \preview-hidden
+content.append-child preview-bucket
 
 update-preview = !->
-  text = it.target.value
-  preview.innerHTML = marked text
+  text = it.target.value || 'Nothing to preview'
+  if show-preview then
+    preview.innerHTML = marked text
 
 # add event listener for keyup
 textarea.add-event-listener 'keyup', update-preview, false
