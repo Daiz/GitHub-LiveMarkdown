@@ -1,8 +1,8 @@
 # Live Markdown Preview for GitHub
 
-This is a userscript that does exactly what it says on the tin: It adds a live preview underneath the markdown input in comments, issues, etc. A picture says more than a thousand words:
+This is a userscript that does exactly what it says on the tin: It adds a live preview underneath the markdown input in comments, issues, etc.
 
-![Demonstration](https://f.cloud.github.com/assets/3596343/523229/3e6bb6ae-c0a1-11e2-9847-211c7bddb9bf.png)
+![Demonstration](https://f.cloud.github.com/assets/3596343/523374/4fe1218a-c0b0-11e2-8b0a-82f0072ef3de.gif)
 
 The Live Preview is enabled by default, updates in realtime and can be toggled on and off with the button in the text area.
 
