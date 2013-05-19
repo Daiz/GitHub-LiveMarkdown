@@ -5,6 +5,10 @@ require! {
   \gaze
 }
 
+libs =
+  '../lib/marked.js'
+  '../lib/highlight.js'
+
 pkg = JSON.parse cat 'package.json'
 
 task \build 'Build the userscript.' !->
@@ -12,20 +16,18 @@ task \build 'Build the userscript.' !->
   cd \src # move to source directory
   head = cat 'header.js'
   body = lsc.compile (cat 'index.ls'), {+bare}
+
   css-opts =
     keep-special-comments: 0
     remove-empty: true
+
   css = clean-css.process (cat 'icon.css'), css-opts
   pre = clean-css.process (cat 'github.css'), css-opts
-  embed = lsc.compile cat 'embed.ls'
-  
-  marked = cat '../lib/marked.js'
-  hljs   = cat '../lib/highlight.js'
 
-  embed .= replace /\r\n|\r|\n|\s\s+/g ''
-  css   .= replace '\\' '\\\\'
+  embed = lsc.compile cat 'embed.ls'
+  libs = cat libs
+
   head  .= replace 'VERSION' pkg.version
-  
   body = body
     .replace 'INLINE-CSS' css
     .replace 'INLINE-PRE-CSS' pre
@@ -33,8 +35,7 @@ task \build 'Build the userscript.' !->
 
   body = """
     (function(){
-      #marked
-      #hljs
+      #libs
       #body
     })();
   """
