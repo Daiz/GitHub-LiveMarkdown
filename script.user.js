@@ -2,7 +2,7 @@
 // @name           Live Markdown Preview for GitHub
 // @namespace      daiz
 // @author         Daiz <taneli.vatanen@gmail.com>
-// @version        0.1.1
+// @version        0.1.2
 // @description    Preview your comments/issues/etc live on GitHub.
 // @include        https://github.com/*/*/issues/*
 // @include        https://github.com/*/*/commit/*
