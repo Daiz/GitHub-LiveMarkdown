@@ -5,7 +5,7 @@ require! {
   \gaze
 }
 
-libs =
+lib-paths =
   '../lib/marked.js'
   '../lib/highlight.js'
 
@@ -25,7 +25,7 @@ task \build 'Build the userscript.' !->
   pre = clean-css.process (cat 'github.css'), css-opts
 
   embed = lsc.compile cat 'embed.ls'
-  libs = cat libs
+  libs = cat lib-paths
 
   head  .= replace 'VERSION' pkg.version
   body = body
