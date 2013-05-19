@@ -21,7 +21,7 @@ task \build 'Build the userscript.' !->
     keep-special-comments: 0
     remove-empty: true
 
-  css = clean-css.process (cat 'icon.css'), css-opts
+  css = clean-css.process (cat 'style.css'), css-opts
   pre = clean-css.process (cat 'github.css'), css-opts
 
   embed = lsc.compile cat 'embed.ls'
