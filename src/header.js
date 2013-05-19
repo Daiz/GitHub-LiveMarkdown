@@ -8,7 +8,7 @@
 // @include        https://github.com/*/*/commit/*
 // @include        https://github.com/*/*/pull/*
 // @include        https://github.com/*/*/pull/*/files
-// @updateURL      https://github.com/Daiz-/GitHub-LiveMarkdown/raw/master/build/script.user.js
-// @downloadURL    https://github.com/Daiz-/GitHub-LiveMarkdown/raw/master/build/script.user.js
+// @updateURL      https://github.com/Daiz-/GitHub-LiveMarkdown/raw/master/script.user.js
+// @downloadURL    https://github.com/Daiz-/GitHub-LiveMarkdown/raw/master/script.user.js
 // @run-at         document-end
 // ==/UserScript==
