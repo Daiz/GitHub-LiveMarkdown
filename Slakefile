@@ -3,6 +3,7 @@ require! {
   lsc: \LiveScript
   \clean-css
   \gaze
+  uglify: \uglify-js
 }
 
 lib-paths =
@@ -44,6 +45,16 @@ task \build 'Build the userscript.' !->
   (head + body) .to 'script.user.js'
   embed .to 'embed.js'
   console.log 'Build successful!'
+
+task \minify 'Build a minified version of the script.' !->
+  head = cat 'src/header.js' .replace \VERSION pkg.version
+  body = uglify.minify 'script.user.js'
+  (head + body.code) .to 'script.min.user.js'
+  console.log 'Minification successful!'
+
+task \dist 'Build and minify.' !->
+  invoke \build
+  invoke \minify
 
 task \watch 'Watch files for change and compile.' !->
 

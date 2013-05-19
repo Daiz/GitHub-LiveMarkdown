@@ -8,7 +8,8 @@
     "LiveScript": "~1.1.1",
     "shelljs": "~0.1.4",
     "clean-css": "~1.0.2",
-    "gaze": "~0.3.4"
+    "gaze": "~0.3.4",
+    "uglify-js": "~2.3.5"
   },
   "repository": {
     "type": "git",
