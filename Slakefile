@@ -31,7 +31,7 @@ task \build 'Build the userscript.' !->
   body = body
     .replace 'INLINE-CSS' css
     .replace 'INLINE-PRE-CSS' pre
-    .replace 'INLINE-JS'  'https://github.com/Daiz-/GitHub-LiveMarkdown/raw/master/embed.js'
+    .replace 'INLINE-JS'  'https://gist.github.com/Daiz-/0146e783887fea4c462d/raw/fea70365ef1281e09959914a8c765efb2d5a1db8/embed.js'
 
   body = """
     (function(){
