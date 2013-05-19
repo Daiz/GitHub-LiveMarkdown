@@ -1,6 +1,6 @@
 @font-face {
   font-family: "LivePreviewIcon";
-  src: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxtZXRhZGF0YT5Db3B5cmlnaHQgKEMpIDIwMTIgYnkgb3JpZ2luYWwgYXV0aG9ycyBAIGZvbnRlbGxvLmNvbTwvbWV0YWRhdGE+CjxkZWZzPgo8Zm9udCBpZD0iZm9udGVsbG8iIGhvcml6LWFkdi14PSIxMDAwIiA+Cjxmb250LWZhY2UgZm9udC1mYW1pbHk9ImZvbnRlbGxvIiBmb250LXdlaWdodD0iNDAwIiBmb250LXN0cmV0Y2g9Im5vcm1hbCIgdW5pdHMtcGVyLWVtPSIxMDAwIiBhc2NlbnQ9Ijg1MCIgZGVzY2VudD0iLTE1MCIgLz4KPG1pc3NpbmctZ2x5cGggaG9yaXotYWR2LXg9IjEwMDAiIC8+CjxnbHlwaCBnbHlwaC1uYW1lPSJwcmV2aWV3IiB1bmljb2RlPSImI3gyMTsiIGQ9Ik0wIDExbDAgNjc5cTAgMzcgMjYgNjN0NjMgMjZsNzUwIDBxMzcgMCA2My0yNnQyNi02M2wwLTY3OXEwLTM3LTI2LTYzdC02My0yNmwtNzUwIDBxLTM3IDAtNjMgMjZ0LTI2IDYzeiBtNzEgMHEwLTcgNS0xM3QxMy01bDMzOSAwIDAgNjQzLTM1NyAwIDAtNjI1eiBtNDI5LTE4bDMzOSAwcTcgMCAxMyA1dDUgMTNsMCA2MjUtMzU3IDAgMC02NDN6IiBob3Jpei1hZHYteD0iOTI4LjU3MSIgLz4KPC9mb250Pgo8L2RlZnM+Cjwvc3ZnPg==") format("svg");
+  src: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxtZXRhZGF0YT5Db3B5cmlnaHQgKEMpIDIwMTIgYnkgb3JpZ2luYWwgYXV0aG9ycyBAIGZvbnRlbGxvLmNvbTwvbWV0YWRhdGE+CjxkZWZzPgo8Zm9udCBpZD0iZm9udGVsbG8iIGhvcml6LWFkdi14PSIxMDAwIiA+Cjxmb250LWZhY2UgZm9udC1mYW1pbHk9ImZvbnRlbGxvIiBmb250LXdlaWdodD0iNDAwIiBmb250LXN0cmV0Y2g9Im5vcm1hbCIgdW5pdHMtcGVyLWVtPSIxMDAwIiBhc2NlbnQ9Ijg1MCIgZGVzY2VudD0iLTE1MCIgLz4KPG1pc3NpbmctZ2x5cGggaG9yaXotYWR2LXg9IjEwMDAiIC8+CjxnbHlwaCBnbHlwaC1uYW1lPSJlZGl0IiB1bmljb2RlPSImI3gyMTsiIGQ9Ik0wLTE1MGwwIDgxOCAxODcgMTgyIDUyMSAwIDAtMjI3IDMxIDMxIDE2Mi0xNjAtMzgxLTM4MS0yMzgtNzggNzYgMjM4IDI2MiAyNjIgMCAyMjctMzY5IDAgMC0xNTYtMTY0IDAgMC02NjggNTMzIDAgMCAxNDMgODggODggMC0zMTgtNzA5IDB6IG0zNjEgMjY0bDExOSAzOS04MCA4MnoiIGhvcml6LWFkdi14PSI5MDIiIC8+CjwvZm9udD4KPC9kZWZzPgo8L3N2Zz4=") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -8,12 +8,12 @@
 .octicon-live-preview:before {
   font-family: "LivePreviewIcon";
   content: "!";
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .write-content .js-toggle-live-preview {
   position: absolute;
-  top: 5px;
+  top: 4px;
   right: 36px;
   color: #333333;
   opacity: .5;
@@ -22,4 +22,12 @@
 
 .js-toggle-live-preview:hover {
   opacity: 1;
+}
+
+.write-content .comment {
+  margin-top: 8px;
+}
+
+.preview-hidden {
+  display: none;
 }
