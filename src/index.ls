@@ -6,13 +6,26 @@ marked.set-options do
   highlight: ->
     hljs.highlight-auto it .value
 
+# formatting function
+format = (text) ->
+  emoji = /:[^:\s]+:/g
+  text .= replace emoji, (str) ->
+    name = str.substr 1 str.length - 2
+    """
+    <img class='emoji' title='#str' alt='#str' src=
+    'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/#name.png'
+    width='20' height='20' align='absmiddle'>
+    """
+  marked text
+
+
 # shortcuts
 d = document
 
 # settings
 show-preview = local-storage.get-item \LiveMarkdownPreview
-show-preview ?= 'true'
-show-preview = if show-preview is 'true' then true else false
+show-preview ?= \true
+show-preview = if show-preview is \true then true else false
 
 # toggle preview on / off
 toggle-preview = !->
@@ -22,7 +35,7 @@ toggle-preview = !->
   if show-preview
     preview-bucket.class-list.remove \preview-hidden
     text = textarea.value or 'Nothing to preview'
-    preview.innerHTML = marked text
+    preview.innerHTML = format text
   else preview-bucket.class-list.add \preview-hidden
 
 # find the important elements
@@ -75,7 +88,7 @@ content.append-child preview-bucket
 update-preview = !->
   text = it.target.value or 'Nothing to preview'
   if show-preview
-    preview.innerHTML = marked text
+    preview.innerHTML = format text
 
 # add event listener for keyup
 textarea.add-event-listener 'keyup', update-preview, false
