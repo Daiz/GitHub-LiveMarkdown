@@ -7,20 +7,32 @@ require! {
   \browserify
 }
 
-lib-paths =
-  '../lib/marked.js'
-  '../lib/highlight.js'
-
 pkg = JSON.parse cat 'package.json'
 
+
+
+task \bundle 'Bundle dependencies.' !->
+
+  b = browserify!
+  b.require \marked
+  b.require \highlight.js
+  (err, deps) <-! b.bundle {}
+  deps .to 'vendor.js'
+  console.log 'Dependencies built successfully!'
+
+
+
 task \build 'Build the userscript.' !->
+
+  if not (test \-e 'vendor.js') then
+    console.log 'vendor.js not compiled. Run slake build again.'
+    invoke \bundle
+    return
+  else libs = cat 'vendor.js'
   
-  b = browserify ['./src/index.ls']
-  b.transform \liveify
   cd \src # move to source directory
-  head = cat 'header.js'
-  (err, body) <-! b.bundle {-detect-globals}
-  # body = lsc.compile (cat 'index.ls'), {+bare}
+  head = cat 'HEADER'
+  body = lsc.compile (cat 'index.ls'), {+bare}
 
   css-opts =
     keep-special-comments: 0
@@ -29,26 +41,27 @@ task \build 'Build the userscript.' !->
   css = clean-css.process (cat 'style.css'), css-opts
   pre = clean-css.process (cat 'github.css'), css-opts
 
-  embed = lsc.compile cat 'embed.ls'
-  # libs = cat lib-paths
+  embed = 'https://gist.github.com/Daiz-/0146e783887fea4c462d/raw/fea70365ef1281e09959914a8c765efb2d5a1db8/embed.js'
 
   head  .= replace 'VERSION' pkg.version
   body = body
     .replace 'INLINE-CSS' css
     .replace 'INLINE-PRE-CSS' pre
-    .replace 'INLINE-JS'  'https://gist.github.com/Daiz-/0146e783887fea4c462d/raw/fea70365ef1281e09959914a8c765efb2d5a1db8/embed.js'
-  /*
+    .replace 'INLINE-JS' embed
+
   body = """
     (function(){
       #libs
       #body
     })();
   """
-  */
+
   cd \.. # come back to main directory
   (head + body) .to 'script.user.js'
-  embed .to 'embed.js'
   console.log 'Build successful!'
+
+
+
 
 task \minify 'Build a minified version of the script.' !->
   head = cat 'src/header.js' .replace \VERSION pkg.version
@@ -56,9 +69,15 @@ task \minify 'Build a minified version of the script.' !->
   (head + body.code) .to 'script.min.user.js'
   console.log 'Minification successful!'
 
+
+
+
 task \dist 'Build and minify.' !->
   invoke \build
   invoke \minify
+
+
+
 
 task \watch 'Watch files for change and compile.' !->
 
