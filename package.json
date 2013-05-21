@@ -9,7 +9,10 @@
     "shelljs": "~0.1.4",
     "clean-css": "~1.0.2",
     "gaze": "~0.3.4",
-    "uglify-js": "~2.3.5"
+    "uglify-js": "~2.3.5",
+    "marked": "~0.2.8",
+    "highlight.js": "~7.3.0",
+    "browserify": "~2.14.1"
   },
   "repository": {
     "type": "git",

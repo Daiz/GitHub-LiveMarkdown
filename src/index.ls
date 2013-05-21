@@ -1,10 +1,15 @@
+require! {
+  \marked
+  hljs: \highlight.js
+}
+
 # configure marked
 marked.set-options do
   gfm: true
   tables: true
   breaks: true
-  highlight: ->
-    hljs.highlight-auto it .value
+  highlight: (code, lang) ->
+    hljs.highlight-auto code .value
 
 # formatting function
 format = (text) ->
@@ -86,9 +91,9 @@ if not show-preview then preview-bucket.class-list.add \preview-hidden
 content.append-child preview-bucket
 
 update-preview = !->
-  text = it.target.value or 'Nothing to preview'
+  text = textarea.value or 'Nothing to preview'
   if show-preview
     preview.innerHTML = format text
 
-# add event listener for keyup
-textarea.add-event-listener 'keyup', update-preview, false
+# add event listeners for updating
+textarea.add-event-listener \keyup, update-preview, false
