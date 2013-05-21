@@ -4,6 +4,7 @@ require! {
   \clean-css
   \gaze
   uglify: \uglify-js
+  \browserify
 }
 
 lib-paths =
@@ -13,10 +14,13 @@ lib-paths =
 pkg = JSON.parse cat 'package.json'
 
 task \build 'Build the userscript.' !->
-
+  
+  b = browserify ['./src/index.ls']
+  b.transform \liveify
   cd \src # move to source directory
   head = cat 'header.js'
-  body = lsc.compile (cat 'index.ls'), {+bare}
+  (err, body) <-! b.bundle {-detect-globals}
+  # body = lsc.compile (cat 'index.ls'), {+bare}
 
   css-opts =
     keep-special-comments: 0
@@ -26,21 +30,21 @@ task \build 'Build the userscript.' !->
   pre = clean-css.process (cat 'github.css'), css-opts
 
   embed = lsc.compile cat 'embed.ls'
-  libs = cat lib-paths
+  # libs = cat lib-paths
 
   head  .= replace 'VERSION' pkg.version
   body = body
     .replace 'INLINE-CSS' css
     .replace 'INLINE-PRE-CSS' pre
     .replace 'INLINE-JS'  'https://gist.github.com/Daiz-/0146e783887fea4c462d/raw/fea70365ef1281e09959914a8c765efb2d5a1db8/embed.js'
-
+  /*
   body = """
     (function(){
       #libs
       #body
     })();
   """
-
+  */
   cd \.. # come back to main directory
   (head + body) .to 'script.user.js'
   embed .to 'embed.js'
