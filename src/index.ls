@@ -9,7 +9,9 @@ marked.set-options do
   tables: true
   breaks: true
   highlight: (code, lang) ->
-    hljs.highlight-auto code .value
+    if lang then
+      hljs.highlight-auto code .value
+    else code
 
 # formatting function
 format = (text) ->
