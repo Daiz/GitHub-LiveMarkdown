@@ -16,13 +16,16 @@ marked.set-options do
 # formatting function
 format = (text) ->
   emoji = /:[a-z0-9_+-]+:/g
+  emoji-list = EMOJI_LIST
   text .= replace emoji, (str) ->
     name = str.substr 1 str.length - 2
-    """
-    <img class='emoji' title='#str' alt='#str' src=
-    'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/#name.png'
-    width='20' height='20' align='absmiddle'>
-    """
+    if name in emoji-list
+      """
+      <img class='emoji' title='#str' alt='#str' src=
+      'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/#name.png'
+      width='20' height='20' align='absmiddle'>
+      """
+    else str
   marked text
 
 
@@ -64,15 +67,15 @@ icon = d.create-element \span
 # create the style elements
 css = d.create-element \style
   ..class-name = \live-preview-styling 
-  ..text-content = \INLINE-CSS
+  ..text-content = \INLINE_CSS
 
 css-pre = d.create-element \style
   ..class-name = \live-preview-code-styling
-  ..text-content = \INLINE-PRE-CSS
+  ..text-content = \INLINE_PRE_CSS
 
 # create the script element
 js = d.create-element \script
-  ..src = \INLINE-JS
+  ..src = \INLINE_JS
 
 # append initial elements to appropriate places
 head
