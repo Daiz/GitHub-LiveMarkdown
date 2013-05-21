@@ -8,8 +8,8 @@ marked.set-options do
   gfm: true
   tables: true
   breaks: true
-  highlight: ->
-    hljs.highlight-auto it .value
+  highlight: (code, lang) ->
+    hljs.highlight-auto code .value
 
 # formatting function
 format = (text) ->
