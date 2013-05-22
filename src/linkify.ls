@@ -7,6 +7,7 @@ Linkify =
       start = end
       end = res.index - start + matched.length
       current = text.substr start, end
+      rest = text.substr end
       short = hash.substr 0 8
       ctx-user = context.split '/' .0
       ret += current.replace matched, if user == ctx-user and not repo
@@ -17,7 +18,7 @@ Linkify =
         "[`#short`](https://github.com/#context/commit/#hash)"
       else
         matched
-    ret
+    ret + rest
 
   issue: (text, context, ret = '') ->
     start = end = 0
@@ -27,6 +28,7 @@ Linkify =
       start = end
       end = res.index - start + matched.length
       current = text.substr start, end
+      rest ? text.substr end
       ctx-user = context.split '/' .0
       ret += current.replace matched, if user == ctx-user and not repo
         "[#user##num](https://github.com/#context/issues/#num"
@@ -36,11 +38,21 @@ Linkify =
         "[#num](https://github.com/#context/issues/#num)"
       else
         matched
-    ret
+    ret + rest
 
-  mention: (text) ->
-    name = text.match /@([A-Za-z0-9-]+)/ .1
-    if name == \mention
-      "<a class='user-mention' href='https://github.com/blog/821'>@#name</a>"
-    else
-      "<a class='user-mention' href='https://github.com/#name'>@#name</a>"
+  mention: (text, ret = '') ->
+    start = end = 0
+    regex = /([^\w])@([\w-]+)|^@([\w-]+)/g
+    while res = regex.exec text
+      [matched, pre, n1, n2] = res
+      name = n1 or n2
+      pre ?= ''
+      start = end
+      end = res.index - start + matched.length
+      current = text.substr start, end
+      rest = text.substr end
+      ret += current.replace matched, if name == \mention
+        "#pre<a class='user-mention' href='https://github.com/blog/821'>@#name</a>"
+      else
+        "#pre<a class='user-mention' href='https://github.com/#name'>@#name</a>"
+    ret + rest
