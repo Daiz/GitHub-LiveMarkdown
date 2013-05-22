@@ -1,4 +1,4 @@
-<[
+emoji-list = <[
   bowtie
   smile
   laughing
