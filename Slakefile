@@ -9,6 +9,11 @@ require! {
 
 pkg = JSON.parse cat 'package.json'
 
+sources =
+  \head.ls
+  \emoji.ls
+  \linkify.ls
+  \index.ls
 
 
 task \bundle 'Bundle dependencies.' !->
@@ -17,14 +22,14 @@ task \bundle 'Bundle dependencies.' !->
   b.require \marked
   b.require \highlight.js
   (err, deps) <-! b.bundle {}
-  deps .to 'vendor.js'
+  deps.to 'vendor.js'
   console.log 'Dependencies built successfully!'
 
 
 
 task \build 'Build the userscript.' !->
 
-  if not (test \-e 'vendor.js') then
+  if not test \-e 'vendor.js'
     console.log 'vendor.js not compiled. Run slake build again.'
     invoke \bundle
     return
@@ -32,7 +37,7 @@ task \build 'Build the userscript.' !->
   
   cd \src # move to source directory
   head = cat 'HEADER'
-  body = lsc.compile (cat 'index.ls'), {+bare}
+  body = lsc.compile (cat sources), {+bare}
 
   css-opts =
     keep-special-comments: 0
@@ -59,16 +64,16 @@ task \build 'Build the userscript.' !->
   """
 
   cd \.. # come back to main directory
-  (head + body) .to 'script.user.js'
+  (head + body).to 'script.user.js'
   console.log 'Build successful!'
 
 
 
 
 task \minify 'Build a minified version of the script.' !->
-  head = cat 'src/header.js' .replace \VERSION pkg.version
+  head = cat 'src/HEADER' .replace \VERSION pkg.version
   body = uglify.minify 'script.user.js'
-  (head + body.code) .to 'script.min.user.js'
+  (head + body.code).to 'script.min.user.js'
   console.log 'Minification successful!'
 
 
