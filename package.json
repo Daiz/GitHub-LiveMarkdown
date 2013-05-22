@@ -1,6 +1,6 @@
 {
   "name": "github-live-markdown-preview",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "Daiz <taneli.vatanen@gmail.com>",
   "license": "MIT",
   "description": "Preview your comments/issues/etc live on GitHub.",
