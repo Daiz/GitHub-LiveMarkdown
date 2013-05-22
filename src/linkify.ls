@@ -22,7 +22,7 @@ Linkify =
     else if user and repo
       "[#user\/#repo##num](https://github.com/#user/#repo/issues/#num"
     else
-      text
+      "[#num](https://github.com/#context/issues/#num)"
 
   mention: (text) ->
     name = text.match /@([A-Za-z0-9-]+)/ .1
