@@ -10,7 +10,7 @@ marked.set-options do
 
 # formatting function
 format = (text) ->
-  
+  text = Linkify.all text
   emoji = /:[a-z0-9_+-]+:/g
   text .= replace emoji, (str) ->
     name = str.substr 1 str.length - 2
