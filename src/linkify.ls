@@ -1,7 +1,7 @@
 Linkify =
   sha1: (text, context) ->
     regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?@?([a-f0-9]{40})/
-    [user, repo, hash] = text.match regex
+    [, user, repo, hash] = text.match regex
     short = hash.substr 0 8
     ctx-user = context.split '/' .0
     if user == ctx-user and not repo
