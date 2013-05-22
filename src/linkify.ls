@@ -7,8 +7,15 @@ Linkify =
     if user == ctx-user and not repo
       "[#user@`#short`](https://github.com/#context/commit/#hash)"
     else if user and repo
-      "[#user/#repo@`#short`](https://github.com/#user/#repo/commit/#hash)"
+      "[#user\/#repo@`#short`](https://github.com/#user/#repo/commit/#hash)"
     else if user == repo == void
       "[`#short`](https://github.com/#context/commit/#hash)"
     else
       text
+
+  mention: (text) ->
+    name = text.match /@([A-Za-z0-9-]+)/ .1
+    if name == \mention
+      "<a class='user-mention' href='https://github.com/blog/821'>@#name</a>"
+    else
+      "<a class='user-mention' href='https://github.com/#name'>@#name</a>"
