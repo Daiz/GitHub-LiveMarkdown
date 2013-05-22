@@ -6,8 +6,7 @@ Linkify =
       [matched, user, repo, hash] = res
       start = end
       end = res.index - start + matched.length
-      current = text.substr start, end 
-      console.log current
+      current = text.substr start, end
       short = hash.substr 0 8
       ctx-user = context.split '/' .0
       ret += current.replace matched, if user == ctx-user and not repo
@@ -20,18 +19,24 @@ Linkify =
         matched
     ret
 
-  issue: (text, context) ->
+  issue: (text, context, ret = '') ->
+    start = end = 0
     regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?#([0-9]+)/g
-    [, user, repo, num] = text.match regex
-    ctx-user = context.split '/' .0
-    if user == ctx-user and not repo
-      "[#user##num](https://github.com/#context/issues/#num"
-    else if user and repo
-      "[#user/#repo##num](https://github.com/#user/#repo/issues/#num"
-    else if user == repo == void
-      "[#num](https://github.com/#context/issues/#num)"
-    else
-      text
+    while res = regex.exec = text
+      [matched, user, repo, num] = text.match regex
+      start = end
+      end = res.index - start + matched.length
+      current = text.substr start, end
+      ctx-user = context.split '/' .0
+      ret += current.replace matched, if user == ctx-user and not repo
+        "[#user##num](https://github.com/#context/issues/#num"
+      else if user and repo
+        "[#user/#repo##num](https://github.com/#user/#repo/issues/#num"
+      else if user == repo == void
+        "[#num](https://github.com/#context/issues/#num)"
+      else
+        matched
+    ret
 
   mention: (text) ->
     name = text.match /@([A-Za-z0-9-]+)/ .1
