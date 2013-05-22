@@ -45,7 +45,6 @@ task \build 'Build the userscript.' !->
 
   css = clean-css.process (cat 'style.css'), css-opts
   pre = clean-css.process (cat 'github.css'), css-opts
-  emoji-list = lsc.compile (cat 'emoji.ls'), {+bare}
 
   embed = 'https://gist.github.com/Daiz-/0146e783887fea4c462d/raw/fea70365ef1281e09959914a8c765efb2d5a1db8/embed.js'
 
@@ -54,7 +53,6 @@ task \build 'Build the userscript.' !->
     .replace 'INLINE_CSS' css
     .replace 'INLINE_PRE_CSS' pre
     .replace 'INLINE_JS' embed
-    .replace 'EMOJI_LIST' emoji-list
 
   body = """
     (function(){
