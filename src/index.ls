@@ -1,8 +1,3 @@
-require! {
-  \marked
-  hljs: \highlight.js
-}
-
 # configure marked
 marked.set-options do
   gfm: true
@@ -15,8 +10,8 @@ marked.set-options do
 
 # formatting function
 format = (text) ->
+  
   emoji = /:[a-z0-9_+-]+:/g
-  emoji-list = EMOJI_LIST
   text .= replace emoji, (str) ->
     name = str.substr 1 str.length - 2
     if name in emoji-list
@@ -27,10 +22,6 @@ format = (text) ->
       """
     else str
   marked text
-
-
-# shortcuts
-d = document
 
 # settings
 show-preview = local-storage.get-item \LiveMarkdownPreview
