@@ -59,7 +59,7 @@ task \build 'Build the userscript.' !->
   """
 
   cd \.. # come back to main directory
-  (head + body) .to 'script.user.js'
+  (head + body) .to 'download/script.user.js'
   console.log 'Build successful!'
 
 
@@ -67,8 +67,8 @@ task \build 'Build the userscript.' !->
 
 task \minify 'Build a minified version of the script.' !->
   head = cat 'src/header.js' .replace \VERSION pkg.version
-  body = uglify.minify 'script.user.js'
-  (head + body.code) .to 'script.min.user.js'
+  body = uglify.minify 'download/script.user.js'
+  (head + body.code) .to 'download/script.min.user.js'
   console.log 'Minification successful!'
 
 
