@@ -13,6 +13,17 @@ Linkify =
     else
       text
 
+  issue: (text, context) ->
+    regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?#([0-9]+)/
+    [, user, repo, num] = text.match regex
+    ctx-user = context.split '/' .0
+    if user == ctx-user and not repo
+      "[#user##num](https://github.com/#context/issues/#num"
+    else if user and repo
+      "[#user\/#repo##num](https://github.com/#user/#repo/issues/#num"
+    else
+      text
+
   mention: (text) ->
     name = text.match /@([A-Za-z0-9-]+)/ .1
     if name == \mention
