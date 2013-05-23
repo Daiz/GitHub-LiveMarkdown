@@ -11,7 +11,7 @@
   * **Firefox:** [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
   * **Opera:** See [documentation.](http://www.opera.com/docs/userjs/) *(Untested)*
   * **Safari:** [NinjaKit](https://github.com/os0x/NinjaKit) *(Untested)*
-2. Download the userscript [**here.**](http://daiz.io/GitHub-LiveMarkdown/download/script.min.user.js)
+2. Download the userscript [**here.**](http://daiz.io/GitHub-LiveMarkdown/vendor/script.min.user.js)
 
 You can also install the script to Chrome directly by saving the `.user.js` file to your hard drive and dragging & dropping it to your Extensions page.
 
