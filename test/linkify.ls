@@ -64,6 +64,21 @@ suite \Linkify !->
         ```
       """
 
+    test 'should not mangle code tags with multiple instances' !->
+    (Linkify.sha """
+      ```
+      d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+      d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+      d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+      ```
+    """ context).should.equal """
+      ```
+      d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+      d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+      d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+      ```
+    """
+
     test 'should deal with multiple instances properly' !->
       (Linkify.sha """
         test: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
@@ -126,6 +141,17 @@ suite \Linkify !->
     test 'should turn issue URLs for user/repo into [#number](/user/repo/issues/number)' !->
       (Linkify.issue 'https://github.com/Not-User/Another-Repo/issues/34' context)
       .should.equal '[#34](/Not-User/Another-Repo/issues/34)'
+
+    test 'should not mangle code tags with multiple instances' !->
+    (Linkify.issue '''
+      ```
+      #34 #34 #34
+      ```
+    ''' context).should.equal '''
+      ```
+      #34 #34 #34
+      ```
+    '''
 
     test 'should deal with multiple instances properly' !->
       (Linkify.issue '''
@@ -190,6 +216,17 @@ suite \Linkify !->
         @User
         ```
       """
+
+    test 'should not mangle code tags with multiple instances' !->
+    (Linkify.mention """
+      ```
+      @User @User @User
+      ```
+    """).should.equal """
+      ```
+      @User @User @User
+      ```
+    """
 
     test 'should deal with multiple instances properly' !->
       (Linkify.mention """
