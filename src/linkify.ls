@@ -18,11 +18,11 @@ Linkify = do ->
         short = hash.substr 0 8
         ctx-user = context.split '/' .0
         ret += current.replace matched, if user == ctx-user and not repo
-          "[#user@`#short`](https://github.com/#context/commit/#hash)"
+          "[#user@`#short`](/#context/commit/#hash)"
         else if user and repo
           "[#user/#repo@`#short`](https://github.com/#user/#repo/commit/#hash)"
         else if user == repo == void
-          "[`#short`](https://github.com/#context/commit/#hash)"
+          "[`#short`](/#context/commit/#hash)"
         else
           matched
       if not ret then text
@@ -39,11 +39,11 @@ Linkify = do ->
         rest = text.substr end
         ctx-user = context.split '/' .0
         ret += current.replace matched, if user == ctx-user and not repo
-          "[#user##num](https://github.com/#context/issues/#num"
+          "[#user##num](/#context/issues/#num"
         else if user and repo
-          "[#user/#repo##num](https://github.com/#user/#repo/issues/#num"
+          "[#user/#repo##num](/#user/#repo/issues/#num"
         else if user == repo == void
-          "[##num](https://github.com/#context/issues/#num)"
+          "[##num](/#context/issues/#num)"
         else
           matched
       if not ret then text
@@ -61,9 +61,9 @@ Linkify = do ->
         current = text.substr start, end
         rest = text.substr end
         ret += current.replace matched, if name == \mention
-          "#pre<a class='user-mention' href='https://github.com/blog/821'>@#name</a>"
+          "#pre<a class='user-mention' href='/blog/821'>@#name</a>"
         else
-          "#pre<a class='user-mention' href='https://github.com/#name'>@#name</a>"
+          "#pre<a class='user-mention' href='/#name'>@#name</a>"
       if not ret then text
       else ret + rest
 
