@@ -17,14 +17,18 @@ Linkify = let
         rest = text.substr end
         short = hash.substr 0 8
         ctx-user = context.split '/' .0
-        ret += current.replace matched, if user == ctx-user and not repo
-          "[#user@`#short`](/#context/commit/#hash)"
-        else if user and repo
-          "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
-        else if user == repo == void
-          "[`#short`](/#context/commit/#hash)"
+        if that.index and (text.char-at that.index - 1) is '/'
+          ret += current
         else
-          matched
+          ret += current.replace matched, switch
+            case user == ctx-user and not repo
+              "[#user@`#short`](/#context/commit/#hash)"
+            case user and repo
+              "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
+            case user == repo == void
+              "[`#short`](/#context/commit/#hash)"
+            default
+              matched
       if not ret then text
       else ret + rest
   
