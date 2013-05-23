@@ -7,14 +7,14 @@ Linkify = let
       # text = @mention text
   
     sha: (text, context, ret = '') ->
-      start = end = 0
+      start = len = 0
       regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?@)?([a-f0-9]{40})/g
       while regex.exec text
         [matched, user, repo, hash] = that
-        start = end
-        end = that.index - start + matched.length
-        current = text.substr start, end
-        rest = text.substr start + end
+        start += len
+        len = that.index - start + matched.length
+        current = text.substr start, len
+        rest = text.substr start + len
         short = hash.substr 0 8
         [ctx-user, ctx-repo] = context / '/'
         if (that.index > 0) and (text.char-at that.index - 1) is '/'
