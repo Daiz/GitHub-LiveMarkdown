@@ -1,5 +1,7 @@
-require \chai .should!
-require! lsc: \LiveScript
+require! {
+  should: \chai .should!
+  lsc: \LiveScript
+}
 
 Linkify = require '../src/linkify'
 
@@ -24,16 +26,24 @@ suite \Linkify !->
       (Linkify.sha 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9'
 
+    test 'should not touch existing links' !->
+      (Linkify.sha '[`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)' context)
+      .should.equal '[`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
+
     test 'should deal with multiple instances properly' !->
       (Linkify.sha """
         test 1: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test 2: User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test 3: User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test 4: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test 5: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test 6: This should appear in the output
       """ context).should.equal """
         test 1: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test 2: [User@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test 3: [User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test 4: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test 5: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test 6: This should appear in the output
       """
 
