@@ -93,6 +93,18 @@ suite \Linkify !->
       (Linkify.issue 'Not-User/Another-Repo#34' context)
       .should.equal '[Not-User/Another-Repo#34](/Not-User/Another-Repo/issues/34)'
 
+    test 'should turn issue URLs for context into [#number](/context/issues/number)' !->
+      (Linkify.issue 'https://github.com/User/Test-Repo/issues/34' context)
+      .should.equal '[#34](/User/Test-Repo/issues/34)'
+
+    test 'should turn issue URLs for user/context-repo into [user#number](/user/context-repo/issues/number)' !->
+      (Linkify.issue 'https://github.com/Not-User/Test-Repo/issues/34' context)
+      .should.equal '[Not-User#34](/Not-User/Test-Repo/issues/34)'
+
+    test 'should turn issue URLs for user/repo into [#number](/user/repo/issues/number)' !->
+      (Linkify.issue 'https://github.com/Not-User/Another-Repo/issues/34' context)
+      .should.equal '[#34](/Not-User/Another-Repo/issues/34)'
+
     test 'should deal with multiple instances properly' !->
       (Linkify.issue """
         test: #34
@@ -101,7 +113,7 @@ suite \Linkify !->
         test: Not-User/Another-Repo#34
       """ context).should.equal """
         test: [#34](/User/Test-Repo/issues/34)
-        test: [#34](/User/Test-Repo/issues/34)
+        test: [User#34](/User/Test-Repo/issues/34)
         test: [Not-User#34](/Not-User/Test-Repo/issues/34)
         test: [Not-User/Another-Repo#34](/Not-User/Another-Repo/issues/34)
       """
