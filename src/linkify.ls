@@ -22,7 +22,7 @@ Linkify = let
           len += stop?index + stop?0.length
           current = text.substr start, len
           rest = text.substr start + len
-        else skip = false 
+        else skip = false
         short = hash.substr 0 8
         [ctx-user, ctx-repo] = context.split '/'
         if (that.index > 0) and (text.char-at that.index - 1) is '/'
@@ -56,8 +56,18 @@ Linkify = let
         len = that.index - start + matched.length
         current = text.substr start, len
         rest = text.substr start + len
+        skip = current.match /`/g
+        if skip and skip.length .&. 1
+          skip = true
+          stop = (/`|```/ == rest)
+          len += stop?index + stop?0.length
+          current = text.substr start, len
+          rest = text.substr start + len
+        else skip = false
         [ctx-user, ctx-repo] = context.split '/'
         ret += current.replace matched, switch
+          case skip
+            matched
           case user and not repo
             "[#user##number](/#user/#ctx-repo/issues/#number)"
           case user and repo
