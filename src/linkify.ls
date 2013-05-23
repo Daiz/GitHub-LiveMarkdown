@@ -20,7 +20,7 @@ Linkify = do ->
         ret += current.replace matched, if user == ctx-user and not repo
           "[#user@`#short`](/#context/commit/#hash)"
         else if user and repo
-          "[#user/#repo@`#short`](https://github.com/#user/#repo/commit/#hash)"
+          "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
         else if user == repo == void
           "[`#short`](/#context/commit/#hash)"
         else
