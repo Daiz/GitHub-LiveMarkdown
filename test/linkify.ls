@@ -28,7 +28,7 @@ suite \Linkify !->
     
     test 'should turn other-user@full-hash into [other-user/context-repo@`hash`](/other-user/context-repo/commit/full-hash)' !->
       (Linkify.sha 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
-      .should.equal '[Not-User@`d4c58ff2`](/Not-User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
+      .should.equal '[Not-User@`d4c58ff2`](/Not-User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
 
     test 'should not linkify /full-hash' !->
       (Linkify.sha '/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
