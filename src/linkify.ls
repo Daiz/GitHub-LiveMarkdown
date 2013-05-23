@@ -49,9 +49,25 @@ Linkify = let
   
     issue: (text, context, ret = '') ->
       start = len = 0
-      regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?)?#([0-9]+)/g
+      regex = //
+      (?:
+        https:\/\/github.com\/
+        ([A-Za-z0-9-]+)\/
+        ([A-Za-z0-9_-]*)\/
+        issues\/([0-9]+)
+      )|(?:
+        (?:([A-Za-z0-9-]*)
+        (?:\/([A-Za-z0-9_-]*))?)?
+        \#([0-9]+)
+      )//g
       while regex.exec text
-        [matched, user, repo, number] = that
+        test = that
+        if (test.0.substr 0 5) == "https"
+          [matched, user, repo, number] = test
+          url = true
+        else
+          [matched, _, _, _, user, repo, number] = test
+          url = false
         start += len
         len = that.index - start + matched.length
         current = text.substr start, len
@@ -70,7 +86,12 @@ Linkify = let
             matched
           case user and not repo
             "[#user##number](/#user/#ctx-repo/issues/#number)"
-          case user and repo
+          case user and repo and url
+            if user != ctx-user and repo == ctx-repo
+              "[#user##number](/#user/#repo/issues/#number)"
+            else
+              "[##number](/#user/#repo/issues/#number)"
+          case user and repo and not url
             "[#user/#repo##number](/#user/#repo/issues/#number)"
           case not user and not repo
             "[##number](/#context/issues/#number)"
