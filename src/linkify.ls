@@ -101,19 +101,31 @@ Linkify = let
       else ret + rest
   
     mention: (text, ret = '') ->
-      start = end = 0
+      start = len = 0
       regex = /([^\w])@([\w-]+)|^@([\w-]+)/g
       while regex.exec text
         [matched, pre, n1, n2] = that
         name = n1 or n2
         pre ?= ''
-        start = end
-        end = that.index - start + matched.length
-        current = text.substr start, end
-        rest = text.substr end
-        ret += current.replace matched, if name == \mention
-          "#pre<a class='user-mention' href='/blog/821'>@#name</a>"
-        else
+        start += len
+        len = that.index - start + matched.length
+        current = text.substr start, len
+        rest = text.substr start + len
+        skip = current.match /`/g
+        if skip and skip.length .&. 1
+          skip = true
+          stop = (/`|```/ == rest)
+          len += stop?index + stop?0.length
+          current = text.substr start, len
+          rest = text.substr start + len
+        else skip = false
+        if /[a-f0-9]{40}/ == name then skip = true
+        ret += current.replace matched, switch
+        case skip
+          matched
+        case name == \mention
+          "#pre<a class='user-mention' href='/blog/821'>@mention</a>"
+        default
           "#pre<a class='user-mention' href='/#name'>@#name</a>"
       if not ret then text
       else ret + rest
