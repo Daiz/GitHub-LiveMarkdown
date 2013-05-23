@@ -44,20 +44,24 @@ suite \Linkify !->
 
     test 'should deal with multiple instances properly' !->
       (Linkify.sha """
-        test 1: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 2: User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 3: User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 4: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 5: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 6: https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 7: This should appear in the output
+        test: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: @d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: /d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: This should appear in the output
       """ context).should.equal """
-        test 1: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 2: [User@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 3: [User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 4: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 5: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 6: https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
-        test 7: This should appear in the output
+        test: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: [User@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: [User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: [Not-User@`d4c58ff2`](/Not-User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: [@`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: /d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: This should appear in the output
       """
 
