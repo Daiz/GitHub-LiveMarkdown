@@ -28,7 +28,8 @@ Linkify = let
             case user and repo
               "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
             case user == repo == void
-              "[`#short`](/#context/commit/#hash)"
+              pre = if /^@/.test matched then \@ else ''
+              "[#pre`#short`](/#context/commit/#hash)"
             default
               matched
       if not ret then text
