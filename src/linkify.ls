@@ -40,7 +40,7 @@ Linkify = let
   
     issue: (text, context, ret = '') ->
       start = end = 0
-      regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?#([0-9]+)/g
+      regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?)?#([0-9]+)/g
       while regex.exec text
         [matched, user, repo, num] = that
         start = end
