@@ -16,7 +16,7 @@ Linkify = let
         current = text.substr start, len
         rest = text.substr start + len
         short = hash.substr 0 8
-        [ctx-user, ctx-repo] = context / '/'
+        [ctx-user, ctx-repo] = context.split '/'
         if (that.index > 0) and (text.char-at that.index - 1) is '/'
           ret += current
         else
@@ -46,7 +46,7 @@ Linkify = let
         len = that.index - start + matched.length
         current = text.substr start, len
         rest = text.substr start + len
-        [ctx-user, ctx-repo] = context / '/'
+        [ctx-user, ctx-repo] = context.split '/'
         ret += current.replace matched, switch
           case user and not repo
             "[#user##number](/#user/#ctx-repo/issues/#number)"
