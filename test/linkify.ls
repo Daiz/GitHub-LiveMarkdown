@@ -154,4 +154,41 @@ suite \Linkify !->
         ```
       '''
 
+  suite '#mention(text)' !->
+
+    test 'should turn @mention into [@mention](blog-post)' !->
+      (Linkify.mention '@mention')
+      .should.equal "<a class='user-mention' href='/blog/821'>@mention</a>"
+
+      (Linkify.mention 'test @mention')
+      .should.equal "test <a class='user-mention' href='/blog/821'>@mention</a>"
+
+    test 'should turn @user into [@user](/user)' !->
+      (Linkify.mention '@User')
+      .should.equal "<a class='user-mention' href='/User'>@User</a>"
+
+      (Linkify.mention 'test @User')
+      .should.equal "test <a class='user-mention' href='/User'>@User</a>"
+
+      (Linkify.mention '-@User')
+      .should.equal "-<a class='user-mention' href='/User'>@User</a>"
+
+    test 'should not touch text@user' !->
+      (Linkify.mention 'text@User')
+      .should.equal 'text@User'
+
+    test 'should not touch anything inside code tags' !->
+      (Linkify.mention '`@User`')
+      .should.equal '`@User`'
+
+      (Linkify.mention '''
+        ```
+        @User
+        ```
+      ''').should.equal '''
+        ```
+        @User
+        ```
+      '''
+
 
