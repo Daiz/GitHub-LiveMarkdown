@@ -1,3 +1,2 @@
 --compilers ls:LiveScript
---require should
 --ui tdd

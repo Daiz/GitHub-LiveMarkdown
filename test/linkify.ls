@@ -1,3 +1,4 @@
+require \chai .should!
 require! lsc: \LiveScript
 
 Linkify = require '../src/linkify'
