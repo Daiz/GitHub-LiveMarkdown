@@ -39,15 +39,15 @@ Linkify = let
       else ret + rest
   
     issue: (text, context, ret = '') ->
-      start = end = 0
+      start = len = 0
       regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?)?#([0-9]+)/g
       while regex.exec text
         [matched, user, repo, num] = that
-        start = end
-        end = that.index - start + matched.length
-        current = text.substr start, end
-        rest = text.substr end
-        ctx-user = context.split '/' .0
+        start += len
+        len = that.index - start + matched.length
+        current = text.substr start, len
+        rest = text.substr start + len
+        [ctx-user, ctx-repo] = context / '/'
         ret += current.replace matched, if user == ctx-user and not repo
           "[#user##num](/#context/issues/#num"
         else if user and repo
