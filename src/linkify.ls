@@ -9,10 +9,10 @@ Linkify = do ->
     sha: (text, context, ret = '') ->
       start = end = 0
       regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?@?([a-f0-9]{40})/g
-      while res = regex.exec text
-        [matched, user, repo, hash] = res
+      while regex.exec text
+        [matched, user, repo, hash] = that
         start = end
-        end = res.index - start + matched.length
+        end = that.index - start + matched.length
         current = text.substr start, end
         rest = text.substr end
         short = hash.substr 0 8
@@ -31,10 +31,10 @@ Linkify = do ->
     issue: (text, context, ret = '') ->
       start = end = 0
       regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?#([0-9]+)/g
-      while res = regex.exec text
-        [matched, user, repo, num] = text.match regex
+      while regex.exec text
+        [matched, user, repo, num] = that
         start = end
-        end = res.index - start + matched.length
+        end = that.index - start + matched.length
         current = text.substr start, end
         rest = text.substr end
         ctx-user = context.split '/' .0
@@ -52,12 +52,12 @@ Linkify = do ->
     mention: (text, ret = '') ->
       start = end = 0
       regex = /([^\w])@([\w-]+)|^@([\w-]+)/g
-      while res = regex.exec text
-        [matched, pre, n1, n2] = res
+      while regex.exec text
+        [matched, pre, n1, n2] = that
         name = n1 or n2
         pre ?= ''
         start = end
-        end = res.index - start + matched.length
+        end = that.index - start + matched.length
         current = text.substr start, end
         rest = text.substr end
         ret += current.replace matched, if name == \mention
