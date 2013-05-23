@@ -8,7 +8,7 @@ Linkify = let
   
     sha: (text, context, ret = '') ->
       start = end = 0
-      regex = /([A-Za-z0-9-]+)?\/?([A-Za-z0-9_-]+)?@?([a-f0-9]{40})/g
+      regex = /(?:([A-Za-z0-9-]+)(?:\/([A-Za-z0-9_-]+))?@)?([a-f0-9]{40})/g
       while regex.exec text
         [matched, user, repo, hash] = that
         start = end
