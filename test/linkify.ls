@@ -181,14 +181,39 @@ suite \Linkify !->
       (Linkify.mention '`@User`')
       .should.equal '`@User`'
 
-      (Linkify.mention '''
+      (Linkify.mention """
         ```
         @User
         ```
-      ''').should.equal '''
+      """).should.equal """
         ```
         @User
         ```
-      '''
+      """
+
+    test 'should deal with multiple instances properly' !->
+      (Linkify.mention """
+        test: @mention
+        test: @User
+        test: @User?
+        test: text@User
+        test: user@example.com
+        test: -@User
+        test: `@User`
+        ```
+        test: @User
+        ```
+      """).should.equal """
+        test: <a class='user-mention' href='/blog/821'>@mention</a>
+        test: <a class='user-mention' href='/User'>@User</a>
+        test: <a class='user-mention' href='/User'>@User</a>?
+        test: text@User
+        test: user@example.com
+        test: -<a class='user-mention' href='/User'>@User</a>
+        test: `@User`
+        ```
+        test: @User
+        ```
+      """
 
 
