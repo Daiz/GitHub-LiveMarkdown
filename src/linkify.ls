@@ -4,7 +4,7 @@ Linkify = let
     all: (text, context) ->
       text = @sha text, context
       text = @issue text, context
-      # text = @mention text
+      text = @mention text
   
     sha: (text, context, ret = '') ->
       start = len = 0
