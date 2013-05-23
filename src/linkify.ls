@@ -9,23 +9,29 @@ Linkify = let
     sha: (text, context, ret = '') ->
       start = len = 0
       regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?@)?([a-f0-9]{40})/g
-      while regex.exec text
-        [matched, user, repo, hash] = that
+      while test = regex.exec text
+        [matched, user, repo, hash] = test
         start += len
-        len = that.index - start + matched.length
-        current = text.substr start, len
-        rest = text.substr start + len
-        skip = current.match /`/g
-        if skip and skip.length .&. 1
+        if start > test.index
+          len = 0
           skip = true
-          stop = (/`|```/ == rest)
-          len += (stop?index + stop?0.length) or rest.length
+          current = ''
+          rest = text.substr start
+        else
+          len = test.index - start + matched.length
           current = text.substr start, len
           rest = text.substr start + len
-        else skip = false
+          skip = current.match /`/g
+          if skip and skip.length .&. 1
+            skip = true
+            stop = (/`|```/ == rest)
+            len += (stop?index + stop?0.length) or rest.length
+            current = text.substr start, len
+            rest = text.substr start + len
+          else skip = false
         short = hash.substr 0 8
         [ctx-user, ctx-repo] = context.split '/'
-        if (that.index > 0) and (text.char-at that.index - 1) is '/'
+        if (test.index > 0) and (text.char-at test.index - 1) is '/'
           ret += current
         else
           ret += current.replace matched, switch
@@ -60,8 +66,7 @@ Linkify = let
         (?:\/([A-Za-z0-9_-]*))?)?
         \#([0-9]+)
       )//g
-      while regex.exec text
-        test = that
+      while test = regex.exec text
         if (test.0.substr 0 5) == "https"
           [matched, user, repo, number] = test
           url = true
@@ -69,17 +74,23 @@ Linkify = let
           [matched, _, _, _, user, repo, number] = test
           url = false
         start += len
-        len = that.index - start + matched.length
-        current = text.substr start, len
-        rest = text.substr start + len
-        skip = current.match /`/g
-        if skip and skip.length .&. 1
+        if start > test.index
+          len = 0
           skip = true
-          stop = (/`|```/ == rest)
-          len += (stop?index + stop?0.length) or rest.length
+          current = ''
+          rest = text.substr start
+        else
+          len = test.index - start + matched.length
           current = text.substr start, len
           rest = text.substr start + len
-        else skip = false
+          skip = current.match /`/g
+          if skip and skip.length .&. 1
+            skip = true
+            stop = (/`|```/ == rest)
+            len += (stop?index + stop?0.length) or rest.length
+            current = text.substr start, len
+            rest = text.substr start + len
+          else skip = false
         [ctx-user, ctx-repo] = context.split '/'
         ret += current.replace matched, switch
           case skip
@@ -103,22 +114,28 @@ Linkify = let
     mention: (text, ret = '') ->
       start = len = 0
       regex = /([^A-Za-z0-9])@([A-Za-z0-9-]+)|^@([A-Za-z0-9-]+)/g
-      while regex.exec text
-        [matched, pre, n1, n2] = that
+      while test = regex.exec text
+        [matched, pre, n1, n2] = test
         name = n1 or n2
         pre ?= ''
         start += len
-        len = that.index - start + matched.length
-        current = text.substr start, len
-        rest = text.substr start + len
-        skip = current.match /`/g
-        if skip and skip.length .&. 1
+        if start > test.index
+          len = 0
           skip = true
-          stop = (/`|```/ == rest)
-          len += (stop?index + stop?0.length) or rest.length
+          current = ''
+          rest = text.substr start
+        else
+          len = test.index - start + matched.length
           current = text.substr start, len
           rest = text.substr start + len
-        else skip = false
+          skip = current.match /`/g
+          if skip and skip.length .&. 1
+            skip = true
+            stop = (/`|```/ == rest)
+            len += (stop?index + stop?0.length) or rest.length
+            current = text.substr start, len
+            rest = text.substr start + len
+          else skip = false
         if /[a-f0-9]{40}/ == name then skip = true
         ret += current.replace matched, switch
         case skip
