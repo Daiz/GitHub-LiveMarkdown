@@ -14,7 +14,7 @@ Linkify = let
         start = end
         end = that.index - start + matched.length
         current = text.substr start, end
-        rest = text.substr end
+        rest = text.substr start + end
         short = hash.substr 0 8
         [ctx-user, ctx-repo] = context / '/'
         if (that.index > 0) and (text.char-at that.index - 1) is '/'
