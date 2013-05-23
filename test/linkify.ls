@@ -18,11 +18,15 @@ suite \Linkify !->
       (Linkify.sha '@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
 
+    test 'should turn /@full-hash into /@[`hash`](/context/commit/full-hash)' !->
+      (Linkify.sha '/@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
+      .should.equal '/@[`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
+
     test 'should turn context-user@full-hash into [context-user@`hash`](/context/commit/full-hash)' !->
       (Linkify.sha 'User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[User@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
     
-    test 'should turn user/repo@full-hash into [user/repo@`hash`](/user/repo/commit/full-hash' !->
+    test 'should turn user/repo@full-hash into [user/repo@`hash`](/user/repo/commit/full-hash)' !->
       (Linkify.sha 'User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
     
@@ -50,6 +54,7 @@ suite \Linkify !->
         test: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: @d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test: /@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: /d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: https://github.com/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: This should appear in the output
@@ -60,6 +65,7 @@ suite \Linkify !->
         test: [Not-User@`d4c58ff2`](/Not-User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: [@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: /@[`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: /d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: https://github.com/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: This should appear in the output
