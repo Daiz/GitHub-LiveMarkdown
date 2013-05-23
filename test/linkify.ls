@@ -9,7 +9,7 @@ suite \Linkify !->
   context = 'User/Test-Repo'
 
   suite '#sha(text, context)' !->
-    
+
     test 'should turn full-hash into [`hash`](/context/commit/full-hash)' !->
       (Linkify.sha 'd4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
@@ -22,13 +22,17 @@ suite \Linkify !->
       (Linkify.sha 'User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
     
-    test 'should not do anything to not-context-user@full-hash' !->
+    test 'should turn other-user@full-hash into [other-user/context-repo@`hash`](/other-user/context-repo/commit/full-hash)' !->
       (Linkify.sha 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
-      .should.equal 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9'
+      .should.equal '[Not-User@`d4c58ff2`](/Not-User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
 
-    test 'should not touch existing links' !->
+    test 'should not touch existing markdown links' !->
       (Linkify.sha '[`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)' context)
       .should.equal '[`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
+
+    test 'should not touch URL links' !->
+      (Linkify.sha 'https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
+      .should.equal 'https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9'
 
     test 'should deal with multiple instances properly' !->
       (Linkify.sha """
@@ -37,13 +41,15 @@ suite \Linkify !->
         test 3: User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test 4: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test 5: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 6: This should appear in the output
+        test 6: https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test 7: This should appear in the output
       """ context).should.equal """
         test 1: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test 2: [User@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test 3: [User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test 4: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test 5: [`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
-        test 6: This should appear in the output
+        test 6: https://github.com/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        test 7: This should appear in the output
       """
 
