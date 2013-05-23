@@ -42,20 +42,23 @@ Linkify = let
       start = len = 0
       regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?)?#([0-9]+)/g
       while regex.exec text
-        [matched, user, repo, num] = that
+        [matched, user, repo, number] = that
         start += len
         len = that.index - start + matched.length
         current = text.substr start, len
         rest = text.substr start + len
         [ctx-user, ctx-repo] = context / '/'
-        ret += current.replace matched, if user == ctx-user and not repo
-          "[#user##num](/#context/issues/#num"
-        else if user and repo
-          "[#user/#repo##num](/#user/#repo/issues/#num"
-        else if user == repo == void
-          "[##num](/#context/issues/#num)"
-        else
-          matched
+        ret += current.replace matched, switch
+          case user and not repo
+            switch user == ctx-user
+            | true  => "[#user##number](/#context/issues/#number)"
+            | false => "[#user##number](/#user/#ctx-repo/issues/#number)"
+          case user and repo
+            "[#user/#repo##number](/#user/#repo/issues/#number)"
+          case not user and not repo
+            "[##number](/#context/issues/#number)"
+          default
+            matched
       if not ret then text
       else ret + rest
   
