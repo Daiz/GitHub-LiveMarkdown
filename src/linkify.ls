@@ -15,12 +15,22 @@ Linkify = let
         len = that.index - start + matched.length
         current = text.substr start, len
         rest = text.substr start + len
+        skip = current.match /`/g
+        if skip and skip.length .&. 1
+          skip = true
+          stop = (/`|```/ == rest)
+          len += stop?index + stop?0.length
+          current = text.substr start, len
+          rest = text.substr start + len
+        else skip = false 
         short = hash.substr 0 8
         [ctx-user, ctx-repo] = context.split '/'
         if (that.index > 0) and (text.char-at that.index - 1) is '/'
           ret += current
         else
           ret += current.replace matched, switch
+            case skip
+              matched
             case user and not repo
               switch
               | /\/@/ == matched  => "[#user/@`#short`](/#user//commit/#hash)"
