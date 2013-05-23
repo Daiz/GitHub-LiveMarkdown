@@ -16,23 +16,23 @@ Linkify = let
         current = text.substr start, end
         rest = text.substr end
         short = hash.substr 0 8
-        [ctx-user, ctx-repo] = context.split '/'
+        [ctx-user, ctx-repo] = context / '/'
         if (that.index > 0) and (text.char-at that.index - 1) is '/'
           ret += current
         else
           ret += current.replace matched, switch
             case user and not repo
               switch
-              | /\/@/.test matched => "[#user/@`#short`](/#user//commit/#hash)"
-              | user == ctx-user   => "[#user@`#short`](/#context/commit/#hash)"
-              | user != ctx-user   => "[#user@`#short`](/#user/#ctx-repo/commit/#hash)"
+              | /\/@/ == matched  => "[#user/@`#short`](/#user//commit/#hash)"
+              | user  == ctx-user => "[#user@`#short`](/#context/commit/#hash)"
+              | user  != ctx-user => "[#user@`#short`](/#user/#ctx-repo/commit/#hash)"
             case user and repo
               "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
             case not user and not repo
               switch
-              | /^@/.test matched   => "[@`#short`](/#context/commit/#hash)"
-              | /^\/@/.test matched => "/@[`#short`](/#context/commit/#hash)"
-              | otherwise           => "[`#short`](/#context/commit/#hash)"
+              | /^@/   == matched => "[@`#short`](/#context/commit/#hash)"
+              | /^\/@/ == matched => "/@[`#short`](/#context/commit/#hash)"
+              | otherwise         => "[`#short`](/#context/commit/#hash)"
             default
               matched
       if not ret then text
