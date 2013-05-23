@@ -75,3 +75,35 @@ suite \Linkify !->
         test: This should appear in the output
       """
 
+  suite '#issue(text, context)' !->
+
+    test 'should turn #number into [#number](/context/issues/number' !->
+      (Linkify.issue '#34' context)
+      .should.equal '[#34](/User/Test-Repo/issues/34)'
+
+    test 'should turn context-user#number into [context-user#number](/context/issues/number)' !->
+      (Linkify.issue 'User#34' context)
+      .should.equal '[User#34](/User/Test-Repo/issues/34)'
+
+    test 'should turn user#number into [user#number](/user/context-repo/issues/number)' !->
+      (Linkify.issue 'Not-User#34' context)
+      .should.equal '[Not-User#34](/Not-User/Test-Repo/issues/34)'
+
+    test 'should turn user/repo#number into [user/repo#number](/user/repo/issues/number)' !->
+      (Linkify.issue 'Not-User/Another-Repo#34' context)
+      .should.equal '[Not-User/Another-Repo#34](/Not-User/Another-Repo/issues/34)'
+
+    test 'should deal with multiple instances properly' !->
+      (Linkify.issue """
+        test: #34
+        test: User#34
+        test: Not-User#34
+        test: Not-User/Another-Repo#34
+      """ context).should.equal """
+        test: [#34](/User/Test-Repo/issues/34)
+        test: [#34](/User/Test-Repo/issues/34)
+        test: [Not-User#34](/Not-User/Test-Repo/issues/34)
+        test: [Not-User/Another-Repo#34](/Not-User/Another-Repo/issues/34)
+      """
+
+
