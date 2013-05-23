@@ -29,6 +29,10 @@ suite \Linkify !->
     test 'should turn user/repo@full-hash into [user/repo@`hash`](/user/repo/commit/full-hash)' !->
       (Linkify.sha 'User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
+
+    test 'should turn user/@full-hash into [user/@`hash`](/user//commit/full-hash)' !->
+      (Linkify.sha 'User/@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
+      .should.equal '[User/@`d4c58ff2`](/User//commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'    
     
     test 'should turn other-user@full-hash into [other-user/context-repo@`hash`](/other-user/context-repo/commit/full-hash)' !->
       (Linkify.sha 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
