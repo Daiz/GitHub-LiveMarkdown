@@ -19,7 +19,7 @@ Linkify = let
         if skip and skip.length .&. 1
           skip = true
           stop = (/`|```/ == rest)
-          len += stop?index + stop?0.length
+          len += (stop?index + stop?0.length) or rest.length
           current = text.substr start, len
           rest = text.substr start + len
         else skip = false
@@ -76,7 +76,7 @@ Linkify = let
         if skip and skip.length .&. 1
           skip = true
           stop = (/`|```/ == rest)
-          len += stop?index + stop?0.length
+          len += (stop?index + stop?0.length) or rest.length
           current = text.substr start, len
           rest = text.substr start + len
         else skip = false
@@ -115,7 +115,7 @@ Linkify = let
         if skip and skip.length .&. 1
           skip = true
           stop = (/`|```/ == rest)
-          len += stop?index + stop?0.length
+          len += (stop?index + stop?0.length) or rest.length
           current = text.substr start, len
           rest = text.substr start + len
         else skip = false
