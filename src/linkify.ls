@@ -8,7 +8,7 @@ Linkify = let
   
     sha: (text, context, ret = '') ->
       start = end = 0
-      regex = /(?:([A-Za-z0-9-]+)?(?:\/([A-Za-z0-9_-]+))?@)?([a-f0-9]{40})/g
+      regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?@)?([a-f0-9]{40})/g
       while regex.exec text
         [matched, user, repo, hash] = that
         start = end
@@ -17,7 +17,7 @@ Linkify = let
         rest = text.substr end
         short = hash.substr 0 8
         [ctx-user, ctx-repo] = context.split '/'
-        if that.index and (text.char-at that.index - 1) is '/'
+        if (that.index > 0) and (text.char-at that.index - 1) is '/'
           ret += current
         else
           ret += current.replace matched, switch
@@ -27,9 +27,11 @@ Linkify = let
               | false => "[#user@`#short`](/#user/#ctx-repo/commit/#hash)"
             case user and repo
               "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
-            case user == repo == void
-              pre = if /^@/.test matched then \@ else ''
-              "[#pre`#short`](/#context/commit/#hash)"
+            case not user and not repo
+              switch
+              | /^@/.test matched   => "[@`#short`](/#context/commit/#hash)"
+              | /^\/@/.test matched => "/@[`#short`](/#context/commit/#hash)"
+              | otherwise           => "[`#short`](/#context/commit/#hash)"
             default
               matched
       if not ret then text
