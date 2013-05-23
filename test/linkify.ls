@@ -71,6 +71,10 @@ suite \Linkify !->
         test: User/Another-Repo@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: `d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9`
+        ```
+        test: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        ```
         test: @d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: /@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
         test: /d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
@@ -82,6 +86,10 @@ suite \Linkify !->
         test: [User/Another-Repo@`d4c58ff2`](/User/Another-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: [Not-User@`d4c58ff2`](/Not-User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+        test: `d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9`
+        ```
+        test: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        ```
         test: [@`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: /@[`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
         test: /d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
