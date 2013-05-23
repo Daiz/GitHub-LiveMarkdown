@@ -12,7 +12,9 @@
     "uglify-js": "~2.3.5",
     "marked": "~0.2.8",
     "highlight.js": "~7.3.0",
-    "browserify": "~2.14.1"
+    "browserify": "~2.14.1",
+    "chai": "~1.6.0",
+    "mocha": "~1.10.0"
   },
   "repository": {
     "type": "git",
