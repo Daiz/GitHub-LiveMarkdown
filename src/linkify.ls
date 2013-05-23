@@ -28,10 +28,10 @@ Linkify = let
             case user and repo
               "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
             case not user and not repo
-              switch
-              | /^@/   == matched => "[@`#short`](/#context/commit/#hash)"
-              | /^\/@/ == matched => "/@[`#short`](/#context/commit/#hash)"
-              | otherwise         => "[`#short`](/#context/commit/#hash)"
+              switch (/^@|^\/@/ == matched)?0
+              | '@'  => "[@`#short`](/#context/commit/#hash)"
+              | '/@' => "/@[`#short`](/#context/commit/#hash)"
+              | _    => "[`#short`](/#context/commit/#hash)"
             default
               matched
       if not ret then text
