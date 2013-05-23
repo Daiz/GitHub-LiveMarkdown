@@ -14,7 +14,3 @@
 2. Download the userscript [**here.**](http://daiz.io/GitHub-LiveMarkdown/vendor/script.min.user.js)
 
 You can also install the script to Chrome directly by saving the `.user.js` file to your hard drive and dragging & dropping it to your Extensions page.
-
-## Upcoming Features
-
-Right now Live Preview doesn't work in commit line notes nor in Zen Mode. It also lacks support for some GitHub-specific things like @mentions, #XXX issue links and checkboxes. These are all planned features and should be implemented eventually.
