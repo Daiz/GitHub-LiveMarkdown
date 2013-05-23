@@ -1,4 +1,4 @@
-Linkify = do ->
+Linkify = let
 
   linkify =
     all: (text, context) ->
@@ -67,7 +67,8 @@ Linkify = do ->
       if not ret then text
       else ret + rest
 
-  if typeof module != void then
+  if typeof module != \undefined
     module.exports = linkify
-  else linkify
+
+  return linkify
 
