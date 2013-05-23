@@ -102,7 +102,7 @@ Linkify = let
   
     mention: (text, ret = '') ->
       start = len = 0
-      regex = /([^\w])@([\w-]+)|^@([\w-]+)/g
+      regex = /([^A-Za-z0-9])@([A-Za-z0-9-]+)|^@([A-Za-z0-9-]+)/g
       while regex.exec text
         [matched, pre, n1, n2] = that
         name = n1 or n2
