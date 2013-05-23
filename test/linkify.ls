@@ -128,16 +128,30 @@ suite \Linkify !->
       .should.equal '[#34](/Not-User/Another-Repo/issues/34)'
 
     test 'should deal with multiple instances properly' !->
-      (Linkify.issue """
+      (Linkify.issue '''
         test: #34
         test: User#34
         test: Not-User#34
         test: Not-User/Another-Repo#34
-      """ context).should.equal """
+        test: https://github.com/User/Test-Repo/issues/34
+        test: https://github.com/Not-User/Test-Repo/issues/34
+        test: https://github.com/Not-User/Another-Repo/issues/34
+        test: `#34`
+        ```
+        test: User#34
+        ```
+      ''' context).should.equal '''
         test: [#34](/User/Test-Repo/issues/34)
         test: [User#34](/User/Test-Repo/issues/34)
         test: [Not-User#34](/Not-User/Test-Repo/issues/34)
         test: [Not-User/Another-Repo#34](/Not-User/Another-Repo/issues/34)
-      """
+        test: [#34](/User/Test-Repo/issues/34)
+        test: [Not-User#34](/Not-User/Test-Repo/issues/34)
+        test: [#34](/Not-User/Another-Repo/issues/34)
+        test: `#34`
+        ```
+        test: User#34
+        ```
+      '''
 
 
