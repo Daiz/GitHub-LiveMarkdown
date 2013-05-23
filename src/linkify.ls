@@ -24,8 +24,7 @@ Linkify = let
             case user and not repo
               switch
               | /\/@/ == matched  => "[#user/@`#short`](/#user//commit/#hash)"
-              | user  == ctx-user => "[#user@`#short`](/#context/commit/#hash)"
-              | user  != ctx-user => "[#user@`#short`](/#user/#ctx-repo/commit/#hash)"
+              | otherwise => "[#user@`#short`](/#user/#ctx-repo/commit/#hash)"
             case user and repo
               "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
             case not user and not repo
@@ -50,9 +49,7 @@ Linkify = let
         [ctx-user, ctx-repo] = context / '/'
         ret += current.replace matched, switch
           case user and not repo
-            switch user == ctx-user
-            | true  => "[#user##number](/#context/issues/#number)"
-            | false => "[#user##number](/#user/#ctx-repo/issues/#number)"
+            "[#user##number](/#user/#ctx-repo/issues/#number)"
           case user and repo
             "[#user/#repo##number](/#user/#repo/issues/#number)"
           case not user and not repo
