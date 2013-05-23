@@ -15,6 +15,8 @@ sources =
   \linkify.ls
   \index.ls
 
+if not test \-d \vendor
+   mkdir \vendor
 
 task \bundle 'Bundle dependencies.' !->
 
@@ -62,7 +64,7 @@ task \build 'Build the userscript.' !->
   """
 
   cd \.. # come back to main directory
-  (head + body).to 'script.user.js'
+  (head + body).to 'vendor/script.user.js'
   console.log 'Build successful!'
 
 
@@ -70,8 +72,8 @@ task \build 'Build the userscript.' !->
 
 task \minify 'Build a minified version of the script.' !->
   head = cat 'src/HEADER' .replace \VERSION pkg.version
-  body = uglify.minify 'script.user.js'
-  (head + body.code).to 'script.min.user.js'
+  body = uglify.minify 'vendor/script.user.js'
+  (head + body.code).to 'vendor/script.min.user.js'
   console.log 'Minification successful!'
 
 
