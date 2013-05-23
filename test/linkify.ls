@@ -30,6 +30,10 @@ suite \Linkify !->
       (Linkify.sha 'Not-User@d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
       .should.equal '[Not-User@`d4c58ff2`](/Not-User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'
 
+    test 'should not linkify /full-hash' !->
+      (Linkify.sha '/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9' context)
+      .should.equal '/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9'
+
     test 'should not touch existing markdown links' !->
       (Linkify.sha '[`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)' context)
       .should.equal '[`d4c58ff2`](/User/Test-Repo/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)'

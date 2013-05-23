@@ -8,7 +8,7 @@ Linkify = let
   
     sha: (text, context, ret = '') ->
       start = end = 0
-      regex = /(?:([A-Za-z0-9-]+)(?:\/([A-Za-z0-9_-]+))?@)?([a-f0-9]{40})/g
+      regex = /(?:([A-Za-z0-9-]+)?(?:\/([A-Za-z0-9_-]+))?@)?([a-f0-9]{40})/g
       while regex.exec text
         [matched, user, repo, hash] = that
         start = end
@@ -16,13 +16,15 @@ Linkify = let
         current = text.substr start, end
         rest = text.substr end
         short = hash.substr 0 8
-        ctx-user = context.split '/' .0
+        [ctx-user, ctx-repo] = context.split '/'
         if that.index and (text.char-at that.index - 1) is '/'
           ret += current
         else
           ret += current.replace matched, switch
-            case user == ctx-user and not repo
-              "[#user@`#short`](/#context/commit/#hash)"
+            case user and not repo
+              switch user == ctx-user
+              | true  => "[#user@`#short`](/#context/commit/#hash)"
+              | false => "[#user@`#short`](/#user/#ctx-repo/commit/#hash)"
             case user and repo
               "[#user/#repo@`#short`](/#user/#repo/commit/#hash)"
             case user == repo == void
