@@ -74,8 +74,6 @@ Linkify = let
       if not ret then text
       else ret + rest
 
-  if typeof module != \undefined
-    module.exports = linkify
-
-  return linkify
+  module?exports = linkify
+  linkify
 
