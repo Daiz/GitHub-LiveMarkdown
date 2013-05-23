@@ -54,6 +54,16 @@ suite \Linkify !->
       (Linkify.sha '`d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9`' context)
       .should.equal '`d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9`'
 
+      (Linkify.sha """
+        ```
+        test d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        ```
+      """ context).should.equal """
+        ```
+        test d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        ```
+      """
+
     test 'should deal with multiple instances properly' !->
       (Linkify.sha """
         test: d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
