@@ -22,7 +22,7 @@ Iterator = let
           rest = text.substr start + len
         else skip = false
       
-      ret += fn current, that unless skip
+      ret += skip and current or fn current, that
 
     if not ret then text
     else ret + rest
