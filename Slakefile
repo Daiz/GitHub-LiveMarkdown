@@ -9,11 +9,12 @@ require! {
 
 pkg = JSON.parse cat 'package.json'
 
-sources =
-  \head.ls
-  \emoji.ls
-  \linkify.ls
-  \index.ls
+sources = <[
+  head.ls
+  emoji.ls
+  linkify.ls
+  index.ls
+]>
 
 if not test \-d \vendor
    mkdir \vendor
@@ -23,7 +24,7 @@ task \bundle 'Bundle dependencies.' !->
   b = browserify!
   b.require \marked
   b.require \highlight.js
-  (err, deps) <-! b.bundle {}
+  err, deps <-! b.bundle {}
   deps.to 'vendor.js'
   console.log 'Dependencies built successfully!'
 
