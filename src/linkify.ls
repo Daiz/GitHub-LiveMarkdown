@@ -1,4 +1,6 @@
 Linkify = let
+  
+  iterator = if module? then require \iterator else Iterator
 
   linkify =
     all: (text, context) ->
