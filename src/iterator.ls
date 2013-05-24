@@ -2,7 +2,7 @@ Iterator = let
     
   iterator = (text, regex, fn, ret = '') ->
     start = len = 0
-    while regex.exec text
+    while test = regex.exec text
       start += len
       if start > test.index
         len = 0
@@ -10,7 +10,7 @@ Iterator = let
         current = ''
         rest = text.substr start
       else
-        len = test.index - start + matched.length
+        len = test.index - start + test.0.length
         current = text.substr start, len
         rest = text.substr start + len
         skip = current.match /`/g
@@ -22,10 +22,10 @@ Iterator = let
           rest = text.substr start + len
         else skip = false
       
-      ret += skip and current or fn current, that
+      ret += skip and current or current.replace test.0, fn test
 
     if not ret then text
     else ret + rest
 
-  module?exports = linkify
-  linkify
+  module?exports = iterator
+  iterator
