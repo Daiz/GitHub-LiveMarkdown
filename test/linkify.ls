@@ -86,6 +86,24 @@ suite \Linkify !->
         test
       """
 
+      (Linkify.sha """
+        test
+
+            test
+
+        d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+            test
+        """ context).should.equal """
+        test
+
+            test
+
+        [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+
+            test
+      """
+
     test 'should not mangle code tags with multiple instances' !->
     (Linkify.sha """
       ```
