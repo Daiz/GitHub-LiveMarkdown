@@ -71,7 +71,7 @@ suite \Linkify !->
 
         test
 
-            d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        \td4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
 
         test
       """ context).should.equal """
@@ -81,7 +81,7 @@ suite \Linkify !->
 
         test
 
-            d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+        \td4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
 
         test
       """
