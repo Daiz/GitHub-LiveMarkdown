@@ -12,6 +12,9 @@
 # to be prepended with it). 
 
 Iterator = let
+
+  reverse = ->
+    it.split '' .reverse!join ''
     
   iterator = (text, regex, fn, ret = '') ->
     start = len = 0
@@ -68,13 +71,16 @@ Iterator = let
             rest = text.substr start + len
         else skip = false
 
-        indent-skip = current.match /\n {4}|\n\t/g
-        if indent-skip
+        indent-skip = current.split '\n'
+        if /^ {4}|^\t/ == indent-skip[*-1]
+          skip = true
           if stop = (/\n[^ \t]{1,4}/ == rest)
-            skip = true
             len += stop.index
-            current = text.substr start, len
-            rest = text.substr start + len
+          else
+            len += rest.length
+          current = text.substr start, len
+          rest = text.substr start + len
+
 
       # Here we append the return string. If `skip` is true, we simply add
       # the current text block as-is, but if it's not, we transform the match
