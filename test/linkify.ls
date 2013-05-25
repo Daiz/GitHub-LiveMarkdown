@@ -64,6 +64,54 @@ suite \Linkify !->
         ```
       """
 
+      (Linkify.sha """
+        test
+
+            d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+        test
+
+        \td4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+        test
+      """ context).should.equal """
+        test
+
+            d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+        test
+
+        \td4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+        test
+      """
+
+      (Linkify.sha """
+        test
+
+            test
+
+        d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+            test
+
+        d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+        \ttest
+        """ context).should.equal """
+        test
+
+            test
+
+        [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+
+            test
+
+        [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+
+        \ttest
+      """
+
     test 'should not mangle code tags with multiple instances' !->
     (Linkify.sha """
       ```
