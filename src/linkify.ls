@@ -1,8 +1,30 @@
+# Linkify module
+# ==============
+# This module reproduces GitHub-specific linkification for things like issues,
+# commits and @mentions. To read more about these, check out the following:
+# 
+# * https://help.github.com/articles/github-flavored-markdown#references
+# * https://github.com/blog/821-mention-somebody-they-re-notified
+# 
+# The `text` in the function arguments is the raw markdown text, and the
+# `context` is a string in the form of Username/Repository - this is used
+# to determine where exactly the links should take and how they should be
+# formatted.
+#
+# To see examples of how this module works, take a look at its unit tests.
+
 Linkify = let
+
+  # If in node.js, get the iterator function with require.
+  # Otherwise, grab it from the Iterator variable. 
   
   iterator = if module? then require './iterator' else Iterator
 
   linkify =
+
+    # A convenient shortcut function that processes the text with all three
+    # linkification functions defined below.
+
     all: (text, context) ->
       text = @sha text, context
       text = @issue text, context
@@ -78,6 +100,10 @@ Linkify = let
             "#pre<a class='user-mention' href='/blog/821'>@mention</a>"
           default
             "#pre<a class='user-mention' href='/#name'>@#name</a>"
+
+  # if this file is required as a module in node.js, the iterator function
+  # is exported as the module contents. Beyond that, we return the iterator
+  # function so that it will be available in the top-level Iterator variable
 
   module?exports = linkify
   linkify
