@@ -94,6 +94,10 @@ suite \Linkify !->
         d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
 
             test
+
+        d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9
+
+        \ttest
         """ context).should.equal """
         test
 
@@ -102,6 +106,10 @@ suite \Linkify !->
         [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
 
             test
+
+        [`d4c58ff2`](/User/Test-Repo/commit/d4c58ff2cd197dc2e53e4d1fee1ca4332fdda5d9)
+
+        \ttest
       """
 
     test 'should not mangle code tags with multiple instances' !->
