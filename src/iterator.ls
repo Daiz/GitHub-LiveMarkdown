@@ -49,6 +49,10 @@ Iterator = let
         # transformation is skipped and we figure out where the code block
         # ends and only transform matches after that.
         #
+        # If you want to know why bitwise AND 1 is used instead of modulo 2,
+        # it's because the former is consistently faster:
+        # http://jsperf.com/modulo-vs-bitwise-and-for-odd-checking
+        #
         # The indent check is much simpler in comparison - it simply figures
         # out if the line of the match is indented with at least 4 spaces
         # or a single tab. If it is, the match transformation is skipped once
