@@ -92,4 +92,4 @@ update-preview = !->
     preview.innerHTML = format text
 
 # add event listeners for updating
-textarea.add-event-listener \keyup, update-preview, false
+textarea.add-event-listener \input, update-preview, false
