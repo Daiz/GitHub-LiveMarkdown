@@ -11,16 +11,7 @@ marked.set-options do
 # formatting function
 format = (text) ->
   text = Linkify.all text, context
-  emoji = /:[a-z0-9_+-]+:/g
-  text .= replace emoji, (str) ->
-    name = str.substr 1 str.length - 2
-    if name in emoji-list
-      """
-      <img class='emoji' title='#str' alt='#str' src=
-      'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/#name.png'
-      width='20' height='20' align='absmiddle'>
-      """
-    else str
+  text = Emoji text
   marked text
 
 # settings
