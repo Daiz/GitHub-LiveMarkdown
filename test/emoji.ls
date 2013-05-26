@@ -11,7 +11,7 @@ suite \Emoji !->
     width='20' height='20' align='absmiddle'>
     """
 
-  test 'should not touch:invalid_emoji:' !->
+  test 'should not touch :invalid_emoji:' !->
     Emoji ':test:' .should.equal ':test:'
 
   test 'should not touch emoji codes inside code blocks' !->
