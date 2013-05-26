@@ -103,7 +103,7 @@ Linkify = let
 
   # if this file is required as a module in node.js, the iterator function
   # is exported as the module contents. Beyond that, we return the iterator
-  # function so that it will be available in the top-level Iterator variable
+  # function so that it will be available in the top-level Linkify variable
 
   module?exports = linkify
   linkify
