@@ -7,6 +7,8 @@ require! {
   \browserify
 }
 
+BUILD_DIR = \build
+
 pkg = JSON.parse cat 'package.json'
 
 sources = <[
@@ -18,8 +20,8 @@ sources = <[
   index.ls
 ]>
 
-if not test \-d \build
-   mkdir \build
+if not test \-d BUILD_DIR
+   mkdir BUILD_DIR
 
 task \bundle 'Bundle dependencies.' !->
 
@@ -67,7 +69,7 @@ task \build 'Build the userscript.' !->
   """
 
   cd \.. # come back to main directory
-  (head + body).to 'build/script.user.js'
+  (head + body).to "#BUILD_DIR/script.user.js"
   console.log 'Build successful!'
 
 
@@ -75,8 +77,8 @@ task \build 'Build the userscript.' !->
 
 task \minify 'Build a minified version of the script.' !->
   head = cat 'src/HEADER' .replace \VERSION pkg.version
-  body = uglify.minify 'build/script.user.js'
-  (head + body.code).to 'build/script.min.user.js'
+  body = uglify.minify "#BUILD_DIR/script.user.js"
+  (head + body.code).to "#BUILD_DIR/script.min.user.js"
   console.log 'Minification successful!'
 
 
