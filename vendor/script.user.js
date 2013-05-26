@@ -2,7 +2,7 @@
 // @name           Live Markdown Preview for GitHub
 // @namespace      daiz
 // @author         Daiz <taneli.vatanen@gmail.com>
-// @version        0.3.0
+// @version        0.3.2
 // @description    Preview your comments/issues/etc live on GitHub.
 // @include        https://github.com/*/*/issues/*
 // @include        https://github.com/*/*/commit/*
@@ -5842,7 +5842,7 @@ module.exports = function(hljs) {
 };
 },{}]},{},[])
 ;
-  var marked, hljs, d, context, emojiList, Linkify, format, showPreview, togglePreview, content, textarea, head, x$, button, y$, icon, z$, css, z1$, cssPre, z2$, js, z3$, previewBucket, preview, updatePreview;
+  var marked, hljs, d, context, Iterator, Linkify, EmojiList, Emoji, format, showPreview, togglePreview, content, textarea, head, x$, button, y$, icon, z$, css, z1$, cssPre, z2$, js, z3$, previewBucket, preview, updatePreview;
 marked = require('marked');
 hljs = require('highlight.js');
 d = document;
@@ -5851,9 +5851,66 @@ context = function(){
   regex = /https:\/\/github.com\/([A-Za-z0-9-]+\/[A-Za-z0-9_-]+)\//;
   return document.location.href.match(regex)[1];
 }();
-emojiList = ['bowtie', 'smile', 'laughing', 'blush', 'smiley', 'relaxed', 'smirk', 'heart_eyes', 'kissing_heart', 'kissing_closed_eyes', 'flushed', 'relieved', 'satisfied', 'grin', 'wink', 'stuck_out_tongue_winking_eye', 'stuck_out_tongue_closed_eyes', 'grinning', 'kissing', 'kissing_smiling_eyes', 'stuck_out_tongue', 'sleeping', 'worried', 'frowning', 'anguished', 'open_mouth', 'grimacing', 'confused', 'hushed', 'expressionless', 'unamused', 'sweat_smile', 'sweat', 'disappointed_relieved', 'weary', 'pensive', 'disappointed', 'confounded', 'fearful', 'cold_sweat', 'persevere', 'cry', 'sob', 'joy', 'astonished', 'scream', 'neckbeard', 'tired_face', 'angry', 'rage', 'triumph', 'sleepy', 'yum', 'mask', 'sunglasses', 'dizzy_face', 'imp', 'smiling_imp', 'neutral_face', 'no_mouth', 'innocent', 'alien', 'yellow_heart', 'blue_heart', 'purple_heart', 'heart', 'green_heart', 'broken_heart', 'heartbeat', 'heartpulse', 'two_hearts', 'revolving_hearts', 'cupid', 'sparkling_heart', 'sparkles', 'star', 'star2', 'dizzy', 'boom', 'collision', 'anger', 'exclamation', 'question', 'grey_exclamation', 'grey_question', 'zzz', 'dash', 'sweat_drops', 'notes', 'musical_note', 'fire', 'hankey', 'poop', 'shit', '+1', 'thumbsup', '-1', 'thumbsdown', 'ok_hand', 'punch', 'facepunch', 'fist', 'v', 'wave', 'hand', 'raised_hand', 'open_hands', 'point_up', 'point_down', 'point_left', 'point_right', 'raised_hands', 'pray', 'point_up_2', 'clap', 'muscle', 'metal', 'fu', 'walking', 'runner', 'running', 'couple', 'family', 'two_men_holding_hands', 'two_women_holding_hands', 'dancer', 'dancers', 'ok_woman', 'no_good', 'information_desk_person', 'raising_hand', 'bride_with_veil', 'person_with_pouting_face', 'person_frowning', 'bow', 'couplekiss', 'couple_with_heart', 'massage', 'haircut', 'nail_care', 'boy', 'girl', 'woman', 'man', 'baby', 'older_woman', 'older_man', 'person_with_blond_hair', 'man_with_gua_pi_mao', 'man_with_turban', 'construction_worker', 'cop', 'angel', 'princess', 'smiley_cat', 'smile_cat', 'heart_eyes_cat', 'kissing_cat', 'smirk_cat', 'scream_cat', 'crying_cat_face', 'joy_cat', 'pouting_cat', 'japanese_ogre', 'japanese_goblin', 'see_no_evil', 'hear_no_evil', 'speak_no_evil', 'guardsman', 'skull', 'feet', 'lips', 'kiss', 'droplet', 'ear', 'eyes', 'nose', 'tongue', 'love_letter', 'bust_in_silhouette', 'busts_in_silhouette', 'speech_balloon', 'thought_balloon', 'feelsgood', 'finnadie', 'goberserk', 'godmode', 'hurtrealbad', 'rage1', 'rage2', 'rage3', 'rage4', 'suspect', 'trollface', 'sunny', 'umbrella', 'cloud', 'snowflake', 'snowman', 'zap', 'cyclone', 'foggy', 'ocean', 'cat', 'dog', 'mouse', 'hamster', 'rabbit', 'wolf', 'frog', 'tiger', 'koala', 'bear', 'pig', 'pig_nose', 'cow', 'boar', 'monkey_face', 'monkey', 'horse', 'racehorse', 'camel', 'sheep', 'elephant', 'panda_face', 'snake', 'bird', 'baby_chick', 'hatched_chick', 'hatching_chick', 'chicken', 'penguin', 'turtle', 'bug', 'honeybee', 'ant', 'beetle', 'snail', 'octopus', 'tropical_fish', 'fish', 'whale', 'whale2', 'dolphin', 'cow2', 'ram', 'rat', 'water_buffalo', 'tiger2', 'rabbit2', 'dragon', 'goat', 'rooster', 'dog2', 'pig2', 'mouse2', 'ox', 'dragon_face', 'blowfish', 'crocodile', 'dromedary_camel', 'leopard', 'cat2', 'poodle', 'paw_prints', 'bouquet', 'cherry_blossom', 'tulip', 'four_leaf_clover', 'rose', 'sunflower', 'hibiscus', 'maple_leaf', 'leaves', 'fallen_leaf', 'herb', 'mushroom', 'cactus', 'palm_tree', 'evergreen_tree', 'deciduous_tree', 'chestnut', 'seedling', 'blossom', 'ear_of_rice', 'shell', 'globe_with_meridians', 'sun_with_face', 'full_moon_with_face', 'new_moon_with_face', 'new_moon', 'waxing_crescent_moon', 'first_quarter_moon', 'waxing_gibbous_moon', 'full_moon', 'waning_gibbous_moon', 'last_quarter_moon', 'waning_crescent_moon', 'last_quarter_moon_with_face', 'first_quarter_moon_with_face', 'moon', 'earth_africa', 'earth_americas', 'earth_asia', 'volcano', 'milky_way', 'partly_sunny', 'octocat', 'squirrel', 'bamboo', 'gift_heart', 'dolls', 'school_satchel', 'mortar_board', 'flags', 'fireworks', 'sparkler', 'wind_chime', 'rice_scene', 'jack_o_lantern', 'ghost', 'santa', 'christmas_tree', 'gift', 'bell', 'no_bell', 'tanabata_tree', 'tada', 'confetti_ball', 'balloon', 'crystal_ball', 'cd', 'dvd', 'floppy_disk', 'camera', 'video_camera', 'movie_camera', 'computer', 'tv', 'iphone', 'phone', 'telephone', 'telephone_receiver', 'pager', 'fax', 'minidisc', 'vhs', 'sound', 'speaker', 'mute', 'loudspeaker', 'mega', 'hourglass', 'hourglass_flowing_sand', 'alarm_clock', 'watch', 'radio', 'satellite', 'loop', 'mag', 'mag_right', 'unlock', 'lock', 'lock_with_ink_pen', 'closed_lock_with_key', 'key', 'bulb', 'flashlight', 'high_brightness', 'low_brightness', 'electric_plug', 'battery', 'calling', 'email', 'mailbox', 'postbox', 'bath', 'bathtub', 'shower', 'toilet', 'wrench', 'nut_and_bolt', 'hammer', 'seat', 'moneybag', 'yen', 'dollar', 'pound', 'euro', 'credit_card', 'money_with_wings', 'e-mail', 'inbox_tray', 'outbox_tray', 'envelope', 'incoming_envelope', 'postal_horn', 'mailbox_closed', 'mailbox_with_mail', 'mailbox_with_no_mail', 'door', 'smoking', 'bomb', 'gun', 'hocho', 'pill', 'syringe', 'page_facing_up', 'page_with_curl', 'bookmark_tabs', 'bar_chart', 'chart_with_upwards_trend', 'chart_with_downwards_trend', 'scroll', 'clipboard', 'calendar', 'date', 'card_index', 'file_folder', 'open_file_folder', 'scissors', 'pushpin', 'paperclip', 'black_nib', 'pencil2', 'straight_ruler', 'triangular_ruler', 'closed_book', 'green_book', 'blue_book', 'orange_book', 'notebook', 'notebook_with_decorative_cover', 'ledger', 'books', 'bookmark', 'name_badge', 'microscope', 'telescope', 'newspaper', 'football', 'basketball', 'soccer', 'baseball', 'tennis', '8ball', 'rugby_football', 'bowling', 'golf', 'mountain_bicyclist', 'bicyclist', 'horse_racing', 'snowboarder', 'swimmer', 'surfer', 'ski', 'spades', 'hearts', 'clubs', 'diamonds', 'gem', 'ring', 'trophy', 'musical_score', 'musical_keyboard', 'violin', 'space_invader', 'video_game', 'black_joker', 'flower_playing_cards', 'game_die', 'dart', 'mahjong', 'clapper', 'memo', 'pencil', 'book', 'art', 'microphone', 'headphones', 'trumpet', 'saxophone', 'guitar', 'shoe', 'sandal', 'high_heel', 'lipstick', 'boot', 'shirt', 'tshirt', 'necktie', 'womans_clothes', 'dress', 'running_shirt_with_sash', 'jeans', 'kimono', 'bikini', 'ribbon', 'tophat', 'crown', 'womans_hat', 'mans_shoe', 'closed_umbrella', 'briefcase', 'handbag', 'pouch', 'purse', 'eyeglasses', 'fishing_pole_and_fish', 'coffee', 'tea', 'sake', 'baby_bottle', 'beer', 'beers', 'cocktail', 'tropical_drink', 'wine_glass', 'fork_and_knife', 'pizza', 'hamburger', 'fries', 'poultry_leg', 'meat_on_bone', 'spaghetti', 'curry', 'fried_shrimp', 'bento', 'sushi', 'fish_cake', 'rice_ball', 'rice_cracker', 'rice', 'ramen', 'stew', 'oden', 'dango', 'egg', 'bread', 'doughnut', 'custard', 'icecream', 'ice_cream', 'shaved_ice', 'birthday', 'cake', 'cookie', 'chocolate_bar', 'candy', 'lollipop', 'honey_pot', 'apple', 'green_apple', 'tangerine', 'lemon', 'cherries', 'grapes', 'watermelon', 'strawberry', 'peach', 'melon', 'banana', 'pear', 'pineapple', 'sweet_potato', 'eggplant', 'tomato', 'corn', 'house', 'house_with_garden', 'school', 'office', 'post_office', 'hospital', 'bank', 'convenience_store', 'love_hotel', 'hotel', 'wedding', 'church', 'department_store', 'european_post_office', 'city_sunrise', 'city_sunset', 'japanese_castle', 'european_castle', 'tent', 'factory', 'tokyo_tower', 'japan', 'mount_fuji', 'sunrise_over_mountains', 'sunrise', 'stars', 'statue_of_liberty', 'bridge_at_night', 'carousel_horse', 'rainbow', 'ferris_wheel', 'fountain', 'roller_coaster', 'ship', 'speedboat', 'boat', 'sailboat', 'rowboat', 'anchor', 'rocket', 'airplane', 'helicopter', 'steam_locomotive', 'tram', 'mountain_railway', 'bike', 'aerial_tramway', 'suspension_railway', 'mountain_cableway', 'tractor', 'blue_car', 'oncoming_automobile', 'car', 'red_car', 'taxi', 'oncoming_taxi', 'articulated_lorry', 'bus', 'oncoming_bus', 'rotating_light', 'police_car', 'oncoming_police_car', 'fire_engine', 'ambulance', 'minibus', 'truck', 'train', 'station', 'train2', 'bullettrain_front', 'bullettrain_side', 'light_rail', 'monorail', 'railway_car', 'trolleybus', 'ticket', 'fuelpump', 'vertical_traffic_light', 'traffic_light', 'warning', 'construction', 'beginner', 'atm', 'slot_machine', 'busstop', 'barber', 'hotsprings', 'checkered_flag', 'crossed_flags', 'izakaya_lantern', 'moyai', 'circus_tent', 'performing_arts', 'round_pushpin', 'triangular_flag_on_post', 'jp', 'kr', 'cn', 'us', 'fr', 'es', 'it', 'ru', 'gb', 'uk', 'de', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'keycap_ten', '1234', 'zero', 'hash', 'symbols', 'arrow_backward', 'arrow_down', 'arrow_forward', 'arrow_left', 'capital_abcd', 'abcd', 'abc', 'arrow_lower_left', 'arrow_lower_right', 'arrow_right', 'arrow_up', 'arrow_upper_left', 'arrow_upper_right', 'arrow_double_down', 'arrow_double_up', 'arrow_down_small', 'arrow_heading_down', 'arrow_heading_up', 'leftwards_arrow_with_hook', 'arrow_right_hook', 'left_right_arrow', 'arrow_up_down', 'arrow_up_small', 'arrows_clockwise', 'arrows_counterclockwise', 'rewind', 'fast_forward', 'information_source', 'ok', 'twisted_rightwards_arrows', 'repeat', 'repeat_one', 'new', 'top', 'up', 'cool', 'free', 'ng', 'cinema', 'koko', 'signal_strength', 'u5272', 'u5408', 'u55b6', 'u6307', 'u6708', 'u6709', 'u6e80', 'u7121', 'u7533', 'u7a7a', 'u7981', 'sa', 'restroom', 'mens', 'womens', 'baby_symbol', 'no_smoking', 'parking', 'wheelchair', 'metro', 'baggage_claim', 'accept', 'wc', 'potable_water', 'put_litter_in_its_place', 'secret', 'congratulations', 'm', 'passport_control', 'left_luggage', 'customs', 'ideograph_advantage', 'cl', 'sos', 'id', 'no_entry_sign', 'underage', 'no_mobile_phones', 'do_not_litter', 'non-potable_water', 'no_bicycles', 'no_pedestrians', 'children_crossing', 'no_entry', 'eight_spoked_asterisk', 'eight_pointed_black_star', 'heart_decoration', 'vs', 'vibration_mode', 'mobile_phone_off', 'chart', 'currency_exchange', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpius', 'sagittarius', 'capricorn', 'aquarius', 'pisces', 'ophiuchus', 'six_pointed_star', 'negative_squared_cross_mark', 'a', 'b', 'ab', 'o2', 'diamond_shape_with_a_dot_inside', 'recycle', 'end', 'on', 'soon', 'clock1', 'clock130', 'clock10', 'clock1030', 'clock11', 'clock1130', 'clock12', 'clock1230', 'clock2', 'clock230', 'clock3', 'clock330', 'clock4', 'clock430', 'clock5', 'clock530', 'clock6', 'clock630', 'clock7', 'clock730', 'clock8', 'clock830', 'clock9', 'clock930', 'heavy_dollar_sign', 'copyright', 'registered', 'tm', 'x', 'heavy_exclamation_mark', 'bangbang', 'interrobang', 'o', 'heavy_multiplication_x', 'heavy_plus_sign', 'heavy_minus_sign', 'heavy_division_sign', 'white_flower', '100', 'heavy_check_mark', 'ballot_box_with_check', 'radio_button', 'link', 'curly_loop', 'wavy_dash', 'part_alternation_mark', 'trident', 'black_square', 'white_square', 'white_check_mark', 'black_square_button', 'white_square_button', 'black_circle', 'white_circle', 'red_circle', 'large_blue_circle', 'large_blue_diamond', 'large_orange_diamond', 'small_blue_diamond', 'small_orange_diamond', 'small_red_triangle', 'small_red_triangle_down', 'shipit'];
+Iterator = (function(){
+  var reverse, iterator;
+  reverse = function(it){
+    return it.split('').reverse().join('');
+  };
+  iterator = function(text, regex, fn, ret){
+    var start, len, skip, test, current, rest, backtickSkip, stop, indentSkip;
+    ret == null && (ret = '');
+    start = len = 0;
+    skip = false;
+    while (test = regex.exec(text)) {
+      start += len;
+      if (start > test.index) {
+        len = 0;
+        skip = true;
+        current = '';
+        rest = text.substr(start);
+      } else {
+        len = test.index - start + test[0].length;
+        current = text.substr(start, len);
+        rest = text.substr(start + len);
+        backtickSkip = current.match(/`/g);
+        if (backtickSkip && backtickSkip.length & 1) {
+          if (stop = /`|```/.exec(rest)) {
+            skip = true;
+            len += stop.index + stop[0].length;
+            current = text.substr(start, len);
+            rest = text.substr(start + len);
+          }
+        } else {
+          skip = false;
+        }
+        indentSkip = current.split('\n');
+        if (/^ {4}|^\t/.exec(indentSkip[indentSkip.length - 1])) {
+          skip = true;
+          if (stop = /\n[^ \t]{1,4}/.exec(rest)) {
+            len += stop.index;
+          } else {
+            len += rest.length;
+          }
+          current = text.substr(start, len);
+          rest = text.substr(start + len);
+        }
+      }
+      ret += skip && current || current.replace(test[0], fn(test));
+    }
+    if (!ret) {
+      return text;
+    } else {
+      return ret + rest;
+    }
+  };
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = iterator;
+  }
+  return iterator;
+}.call(this));
 Linkify = (function(){
-  var linkify;
+  var iterator, linkify;
+  iterator = typeof module != 'undefined' && module !== null ? require('./iterator') : Iterator;
   linkify = {
     all: function(text, context){
       text = this.sha(text, context);
@@ -5861,122 +5918,59 @@ Linkify = (function(){
       return text = this.mention(text);
     },
     sha: function(text, context, ret){
-      var start, len, regex, test, matched, user, repo, hash, skip, current, rest, stop, short, ref$, ctxUser, ctxRepo;
+      var regex;
       ret == null && (ret = '');
-      start = len = 0;
       regex = /(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?@)?([a-f0-9]{40})/g;
-      while (test = regex.exec(text)) {
-        matched = test[0], user = test[1], repo = test[2], hash = test[3];
-        start += len;
-        if (start > test.index) {
-          len = 0;
-          skip = true;
-          current = '';
-          rest = text.substr(start);
-        } else {
-          len = test.index - start + matched.length;
-          current = text.substr(start, len);
-          rest = text.substr(start + len);
-          skip = current.match(/`/g);
-          if (skip && skip.length & 1) {
-            skip = true;
-            stop = /`|```/.exec(rest);
-            len += (stop != null ? stop.index : void 8) + (stop != null ? stop[0].length : void 8) || rest.length;
-            current = text.substr(start, len);
-            rest = text.substr(start + len);
-          } else {
-            skip = false;
-          }
-        }
+      return iterator(text, regex, function(it){
+        var matched, user, repo, hash, short, ref$, ctxUser, ctxRepo;
+        matched = it[0], user = it[1], repo = it[2], hash = it[3];
         short = hash.substr(0, 8);
         ref$ = context.split('/'), ctxUser = ref$[0], ctxRepo = ref$[1];
-        if (test.index > 0 && text.charAt(test.index - 1) === '/') {
-          ret += current;
+        if (it.index > 0 && text.charAt(it.index - 1) === '/') {
+          return matched;
         } else {
-          ret += current.replace(matched, (fn$()));
-        }
-      }
-      if (!ret) {
-        return text;
-      } else {
-        return ret + rest;
-      }
-      function fn$(){
-        var ref$;
-        switch (false) {
-        case !skip:
-          return matched;
-        case !(user && !repo):
           switch (false) {
-          case !/\/@/.test(matched):
-            return "[" + user + "/@`" + short + "`](/" + user + "//commit/" + hash + ")";
+          case !(user && !repo):
+            switch (false) {
+            case !/\/@/.test(matched):
+              return "[" + user + "/@`" + short + "`](/" + user + "//commit/" + hash + ")";
+            default:
+              return "[" + user + "@`" + short + "`](/" + user + "/" + ctxRepo + "/commit/" + hash + ")";
+            }
+            break;
+          case !(user && repo):
+            return "[" + user + "/" + repo + "@`" + short + "`](/" + user + "/" + repo + "/commit/" + hash + ")";
+          case !(!user && !repo):
+            switch ((ref$ = /^@|^\/@/.exec(matched)) != null && ref$[0]) {
+            case '@':
+              return "[@`" + short + "`](/" + context + "/commit/" + hash + ")";
+            case '/@':
+              return "/@[`" + short + "`](/" + context + "/commit/" + hash + ")";
+            default:
+              return "[`" + short + "`](/" + context + "/commit/" + hash + ")";
+            }
+            break;
           default:
-            return "[" + user + "@`" + short + "`](/" + user + "/" + ctxRepo + "/commit/" + hash + ")";
+            return matched;
           }
-          break;
-        case !(user && repo):
-          return "[" + user + "/" + repo + "@`" + short + "`](/" + user + "/" + repo + "/commit/" + hash + ")";
-        case !(!user && !repo):
-          switch ((ref$ = /^@|^\/@/.exec(matched)) != null && ref$[0]) {
-          case '@':
-            return "[@`" + short + "`](/" + context + "/commit/" + hash + ")";
-          case '/@':
-            return "/@[`" + short + "`](/" + context + "/commit/" + hash + ")";
-          default:
-            return "[`" + short + "`](/" + context + "/commit/" + hash + ")";
-          }
-          break;
-        default:
-          return matched;
         }
-      }
+      });
     },
     issue: function(text, context, ret){
-      var start, len, regex, test, matched, user, repo, number, url, _, skip, current, rest, stop, ref$, ctxUser, ctxRepo;
+      var regex;
       ret == null && (ret = '');
-      start = len = 0;
       regex = /(?:https:\/\/github.com\/([A-Za-z0-9-]+)\/([A-Za-z0-9_-]*)\/issues\/([0-9]+))|(?:(?:([A-Za-z0-9-]*)(?:\/([A-Za-z0-9_-]*))?)?\#([0-9]+))/g;
-      while (test = regex.exec(text)) {
-        if (test[0].substr(0, 5) === "https") {
-          matched = test[0], user = test[1], repo = test[2], number = test[3];
+      return iterator(text, regex, function(it){
+        var matched, user, repo, number, url, _, ref$, ctxUser, ctxRepo;
+        if (it[0].substr(0, 5) === 'https') {
+          matched = it[0], user = it[1], repo = it[2], number = it[3];
           url = true;
         } else {
-          matched = test[0], _ = test[1], _ = test[2], _ = test[3], user = test[4], repo = test[5], number = test[6];
+          matched = it[0], _ = it[1], _ = it[2], _ = it[3], user = it[4], repo = it[5], number = it[6];
           url = false;
         }
-        start += len;
-        if (start > test.index) {
-          len = 0;
-          skip = true;
-          current = '';
-          rest = text.substr(start);
-        } else {
-          len = test.index - start + matched.length;
-          current = text.substr(start, len);
-          rest = text.substr(start + len);
-          skip = current.match(/`/g);
-          if (skip && skip.length & 1) {
-            skip = true;
-            stop = /`|```/.exec(rest);
-            len += (stop != null ? stop.index : void 8) + (stop != null ? stop[0].length : void 8) || rest.length;
-            current = text.substr(start, len);
-            rest = text.substr(start + len);
-          } else {
-            skip = false;
-          }
-        }
         ref$ = context.split('/'), ctxUser = ref$[0], ctxRepo = ref$[1];
-        ret += current.replace(matched, (fn$()));
-      }
-      if (!ret) {
-        return text;
-      } else {
-        return ret + rest;
-      }
-      function fn$(){
         switch (false) {
-        case !skip:
-          return matched;
         case !(user && !repo):
           return "[" + user + "#" + number + "](/" + user + "/" + ctxRepo + "/issues/" + number + ")";
         case !(user && repo && url):
@@ -5993,64 +5987,68 @@ Linkify = (function(){
         default:
           return matched;
         }
-      }
+      });
     },
     mention: function(text, ret){
-      var start, len, regex, test, matched, pre, n1, n2, name, skip, current, rest, stop;
+      var regex;
       ret == null && (ret = '');
-      start = len = 0;
       regex = /([^A-Za-z0-9])@([A-Za-z0-9-]+)|^@([A-Za-z0-9-]+)/g;
-      while (test = regex.exec(text)) {
-        matched = test[0], pre = test[1], n1 = test[2], n2 = test[3];
+      return iterator(text, regex, function(it){
+        var matched, pre, n1, n2, name, skip;
+        matched = it[0], pre = it[1], n1 = it[2], n2 = it[3];
         name = n1 || n2;
         pre == null && (pre = '');
-        start += len;
-        if (start > test.index) {
-          len = 0;
-          skip = true;
-          current = '';
-          rest = text.substr(start);
-        } else {
-          len = test.index - start + matched.length;
-          current = text.substr(start, len);
-          rest = text.substr(start + len);
-          skip = current.match(/`/g);
-          if (skip && skip.length & 1) {
-            skip = true;
-            stop = /`|```/.exec(rest);
-            len += (stop != null ? stop.index : void 8) + (stop != null ? stop[0].length : void 8) || rest.length;
-            current = text.substr(start, len);
-            rest = text.substr(start + len);
-          } else {
-            skip = false;
-          }
-        }
         if (/[a-f0-9]{40}/.exec(name)) {
           skip = true;
         }
-        ret += current.replace(matched, (fn$()));
-      }
-      if (!ret) {
-        return text;
-      } else {
-        return ret + rest;
-      }
-      function fn$(){
         switch (false) {
-        case !skip:
-          return matched;
         case name !== 'mention':
           return pre + "<a class='user-mention' href='/blog/821'>@mention</a>";
         default:
           return pre + "<a class='user-mention' href='/" + name + "'>@" + name + "</a>";
         }
-      }
+      });
     }
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = linkify;
   }
   return linkify;
+}.call(this));
+EmojiList = (function(){
+  var emojiList;
+  emojiList = ['bowtie', 'smile', 'laughing', 'blush', 'smiley', 'relaxed', 'smirk', 'heart_eyes', 'kissing_heart', 'kissing_closed_eyes', 'flushed', 'relieved', 'satisfied', 'grin', 'wink', 'stuck_out_tongue_winking_eye', 'stuck_out_tongue_closed_eyes', 'grinning', 'kissing', 'kissing_smiling_eyes', 'stuck_out_tongue', 'sleeping', 'worried', 'frowning', 'anguished', 'open_mouth', 'grimacing', 'confused', 'hushed', 'expressionless', 'unamused', 'sweat_smile', 'sweat', 'disappointed_relieved', 'weary', 'pensive', 'disappointed', 'confounded', 'fearful', 'cold_sweat', 'persevere', 'cry', 'sob', 'joy', 'astonished', 'scream', 'neckbeard', 'tired_face', 'angry', 'rage', 'triumph', 'sleepy', 'yum', 'mask', 'sunglasses', 'dizzy_face', 'imp', 'smiling_imp', 'neutral_face', 'no_mouth', 'innocent', 'alien', 'yellow_heart', 'blue_heart', 'purple_heart', 'heart', 'green_heart', 'broken_heart', 'heartbeat', 'heartpulse', 'two_hearts', 'revolving_hearts', 'cupid', 'sparkling_heart', 'sparkles', 'star', 'star2', 'dizzy', 'boom', 'collision', 'anger', 'exclamation', 'question', 'grey_exclamation', 'grey_question', 'zzz', 'dash', 'sweat_drops', 'notes', 'musical_note', 'fire', 'hankey', 'poop', 'shit', '+1', 'thumbsup', '-1', 'thumbsdown', 'ok_hand', 'punch', 'facepunch', 'fist', 'v', 'wave', 'hand', 'raised_hand', 'open_hands', 'point_up', 'point_down', 'point_left', 'point_right', 'raised_hands', 'pray', 'point_up_2', 'clap', 'muscle', 'metal', 'fu', 'walking', 'runner', 'running', 'couple', 'family', 'two_men_holding_hands', 'two_women_holding_hands', 'dancer', 'dancers', 'ok_woman', 'no_good', 'information_desk_person', 'raising_hand', 'bride_with_veil', 'person_with_pouting_face', 'person_frowning', 'bow', 'couplekiss', 'couple_with_heart', 'massage', 'haircut', 'nail_care', 'boy', 'girl', 'woman', 'man', 'baby', 'older_woman', 'older_man', 'person_with_blond_hair', 'man_with_gua_pi_mao', 'man_with_turban', 'construction_worker', 'cop', 'angel', 'princess', 'smiley_cat', 'smile_cat', 'heart_eyes_cat', 'kissing_cat', 'smirk_cat', 'scream_cat', 'crying_cat_face', 'joy_cat', 'pouting_cat', 'japanese_ogre', 'japanese_goblin', 'see_no_evil', 'hear_no_evil', 'speak_no_evil', 'guardsman', 'skull', 'feet', 'lips', 'kiss', 'droplet', 'ear', 'eyes', 'nose', 'tongue', 'love_letter', 'bust_in_silhouette', 'busts_in_silhouette', 'speech_balloon', 'thought_balloon', 'feelsgood', 'finnadie', 'goberserk', 'godmode', 'hurtrealbad', 'rage1', 'rage2', 'rage3', 'rage4', 'suspect', 'trollface', 'sunny', 'umbrella', 'cloud', 'snowflake', 'snowman', 'zap', 'cyclone', 'foggy', 'ocean', 'cat', 'dog', 'mouse', 'hamster', 'rabbit', 'wolf', 'frog', 'tiger', 'koala', 'bear', 'pig', 'pig_nose', 'cow', 'boar', 'monkey_face', 'monkey', 'horse', 'racehorse', 'camel', 'sheep', 'elephant', 'panda_face', 'snake', 'bird', 'baby_chick', 'hatched_chick', 'hatching_chick', 'chicken', 'penguin', 'turtle', 'bug', 'honeybee', 'ant', 'beetle', 'snail', 'octopus', 'tropical_fish', 'fish', 'whale', 'whale2', 'dolphin', 'cow2', 'ram', 'rat', 'water_buffalo', 'tiger2', 'rabbit2', 'dragon', 'goat', 'rooster', 'dog2', 'pig2', 'mouse2', 'ox', 'dragon_face', 'blowfish', 'crocodile', 'dromedary_camel', 'leopard', 'cat2', 'poodle', 'paw_prints', 'bouquet', 'cherry_blossom', 'tulip', 'four_leaf_clover', 'rose', 'sunflower', 'hibiscus', 'maple_leaf', 'leaves', 'fallen_leaf', 'herb', 'mushroom', 'cactus', 'palm_tree', 'evergreen_tree', 'deciduous_tree', 'chestnut', 'seedling', 'blossom', 'ear_of_rice', 'shell', 'globe_with_meridians', 'sun_with_face', 'full_moon_with_face', 'new_moon_with_face', 'new_moon', 'waxing_crescent_moon', 'first_quarter_moon', 'waxing_gibbous_moon', 'full_moon', 'waning_gibbous_moon', 'last_quarter_moon', 'waning_crescent_moon', 'last_quarter_moon_with_face', 'first_quarter_moon_with_face', 'moon', 'earth_africa', 'earth_americas', 'earth_asia', 'volcano', 'milky_way', 'partly_sunny', 'octocat', 'squirrel', 'bamboo', 'gift_heart', 'dolls', 'school_satchel', 'mortar_board', 'flags', 'fireworks', 'sparkler', 'wind_chime', 'rice_scene', 'jack_o_lantern', 'ghost', 'santa', 'christmas_tree', 'gift', 'bell', 'no_bell', 'tanabata_tree', 'tada', 'confetti_ball', 'balloon', 'crystal_ball', 'cd', 'dvd', 'floppy_disk', 'camera', 'video_camera', 'movie_camera', 'computer', 'tv', 'iphone', 'phone', 'telephone', 'telephone_receiver', 'pager', 'fax', 'minidisc', 'vhs', 'sound', 'speaker', 'mute', 'loudspeaker', 'mega', 'hourglass', 'hourglass_flowing_sand', 'alarm_clock', 'watch', 'radio', 'satellite', 'loop', 'mag', 'mag_right', 'unlock', 'lock', 'lock_with_ink_pen', 'closed_lock_with_key', 'key', 'bulb', 'flashlight', 'high_brightness', 'low_brightness', 'electric_plug', 'battery', 'calling', 'email', 'mailbox', 'postbox', 'bath', 'bathtub', 'shower', 'toilet', 'wrench', 'nut_and_bolt', 'hammer', 'seat', 'moneybag', 'yen', 'dollar', 'pound', 'euro', 'credit_card', 'money_with_wings', 'e-mail', 'inbox_tray', 'outbox_tray', 'envelope', 'incoming_envelope', 'postal_horn', 'mailbox_closed', 'mailbox_with_mail', 'mailbox_with_no_mail', 'door', 'smoking', 'bomb', 'gun', 'hocho', 'pill', 'syringe', 'page_facing_up', 'page_with_curl', 'bookmark_tabs', 'bar_chart', 'chart_with_upwards_trend', 'chart_with_downwards_trend', 'scroll', 'clipboard', 'calendar', 'date', 'card_index', 'file_folder', 'open_file_folder', 'scissors', 'pushpin', 'paperclip', 'black_nib', 'pencil2', 'straight_ruler', 'triangular_ruler', 'closed_book', 'green_book', 'blue_book', 'orange_book', 'notebook', 'notebook_with_decorative_cover', 'ledger', 'books', 'bookmark', 'name_badge', 'microscope', 'telescope', 'newspaper', 'football', 'basketball', 'soccer', 'baseball', 'tennis', '8ball', 'rugby_football', 'bowling', 'golf', 'mountain_bicyclist', 'bicyclist', 'horse_racing', 'snowboarder', 'swimmer', 'surfer', 'ski', 'spades', 'hearts', 'clubs', 'diamonds', 'gem', 'ring', 'trophy', 'musical_score', 'musical_keyboard', 'violin', 'space_invader', 'video_game', 'black_joker', 'flower_playing_cards', 'game_die', 'dart', 'mahjong', 'clapper', 'memo', 'pencil', 'book', 'art', 'microphone', 'headphones', 'trumpet', 'saxophone', 'guitar', 'shoe', 'sandal', 'high_heel', 'lipstick', 'boot', 'shirt', 'tshirt', 'necktie', 'womans_clothes', 'dress', 'running_shirt_with_sash', 'jeans', 'kimono', 'bikini', 'ribbon', 'tophat', 'crown', 'womans_hat', 'mans_shoe', 'closed_umbrella', 'briefcase', 'handbag', 'pouch', 'purse', 'eyeglasses', 'fishing_pole_and_fish', 'coffee', 'tea', 'sake', 'baby_bottle', 'beer', 'beers', 'cocktail', 'tropical_drink', 'wine_glass', 'fork_and_knife', 'pizza', 'hamburger', 'fries', 'poultry_leg', 'meat_on_bone', 'spaghetti', 'curry', 'fried_shrimp', 'bento', 'sushi', 'fish_cake', 'rice_ball', 'rice_cracker', 'rice', 'ramen', 'stew', 'oden', 'dango', 'egg', 'bread', 'doughnut', 'custard', 'icecream', 'ice_cream', 'shaved_ice', 'birthday', 'cake', 'cookie', 'chocolate_bar', 'candy', 'lollipop', 'honey_pot', 'apple', 'green_apple', 'tangerine', 'lemon', 'cherries', 'grapes', 'watermelon', 'strawberry', 'peach', 'melon', 'banana', 'pear', 'pineapple', 'sweet_potato', 'eggplant', 'tomato', 'corn', 'house', 'house_with_garden', 'school', 'office', 'post_office', 'hospital', 'bank', 'convenience_store', 'love_hotel', 'hotel', 'wedding', 'church', 'department_store', 'european_post_office', 'city_sunrise', 'city_sunset', 'japanese_castle', 'european_castle', 'tent', 'factory', 'tokyo_tower', 'japan', 'mount_fuji', 'sunrise_over_mountains', 'sunrise', 'stars', 'statue_of_liberty', 'bridge_at_night', 'carousel_horse', 'rainbow', 'ferris_wheel', 'fountain', 'roller_coaster', 'ship', 'speedboat', 'boat', 'sailboat', 'rowboat', 'anchor', 'rocket', 'airplane', 'helicopter', 'steam_locomotive', 'tram', 'mountain_railway', 'bike', 'aerial_tramway', 'suspension_railway', 'mountain_cableway', 'tractor', 'blue_car', 'oncoming_automobile', 'car', 'red_car', 'taxi', 'oncoming_taxi', 'articulated_lorry', 'bus', 'oncoming_bus', 'rotating_light', 'police_car', 'oncoming_police_car', 'fire_engine', 'ambulance', 'minibus', 'truck', 'train', 'station', 'train2', 'bullettrain_front', 'bullettrain_side', 'light_rail', 'monorail', 'railway_car', 'trolleybus', 'ticket', 'fuelpump', 'vertical_traffic_light', 'traffic_light', 'warning', 'construction', 'beginner', 'atm', 'slot_machine', 'busstop', 'barber', 'hotsprings', 'checkered_flag', 'crossed_flags', 'izakaya_lantern', 'moyai', 'circus_tent', 'performing_arts', 'round_pushpin', 'triangular_flag_on_post', 'jp', 'kr', 'cn', 'us', 'fr', 'es', 'it', 'ru', 'gb', 'uk', 'de', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'keycap_ten', '1234', 'zero', 'hash', 'symbols', 'arrow_backward', 'arrow_down', 'arrow_forward', 'arrow_left', 'capital_abcd', 'abcd', 'abc', 'arrow_lower_left', 'arrow_lower_right', 'arrow_right', 'arrow_up', 'arrow_upper_left', 'arrow_upper_right', 'arrow_double_down', 'arrow_double_up', 'arrow_down_small', 'arrow_heading_down', 'arrow_heading_up', 'leftwards_arrow_with_hook', 'arrow_right_hook', 'left_right_arrow', 'arrow_up_down', 'arrow_up_small', 'arrows_clockwise', 'arrows_counterclockwise', 'rewind', 'fast_forward', 'information_source', 'ok', 'twisted_rightwards_arrows', 'repeat', 'repeat_one', 'new', 'top', 'up', 'cool', 'free', 'ng', 'cinema', 'koko', 'signal_strength', 'u5272', 'u5408', 'u55b6', 'u6307', 'u6708', 'u6709', 'u6e80', 'u7121', 'u7533', 'u7a7a', 'u7981', 'sa', 'restroom', 'mens', 'womens', 'baby_symbol', 'no_smoking', 'parking', 'wheelchair', 'metro', 'baggage_claim', 'accept', 'wc', 'potable_water', 'put_litter_in_its_place', 'secret', 'congratulations', 'm', 'passport_control', 'left_luggage', 'customs', 'ideograph_advantage', 'cl', 'sos', 'id', 'no_entry_sign', 'underage', 'no_mobile_phones', 'do_not_litter', 'non-potable_water', 'no_bicycles', 'no_pedestrians', 'children_crossing', 'no_entry', 'eight_spoked_asterisk', 'eight_pointed_black_star', 'heart_decoration', 'vs', 'vibration_mode', 'mobile_phone_off', 'chart', 'currency_exchange', 'aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpius', 'sagittarius', 'capricorn', 'aquarius', 'pisces', 'ophiuchus', 'six_pointed_star', 'negative_squared_cross_mark', 'a', 'b', 'ab', 'o2', 'diamond_shape_with_a_dot_inside', 'recycle', 'end', 'on', 'soon', 'clock1', 'clock130', 'clock10', 'clock1030', 'clock11', 'clock1130', 'clock12', 'clock1230', 'clock2', 'clock230', 'clock3', 'clock330', 'clock4', 'clock430', 'clock5', 'clock530', 'clock6', 'clock630', 'clock7', 'clock730', 'clock8', 'clock830', 'clock9', 'clock930', 'heavy_dollar_sign', 'copyright', 'registered', 'tm', 'x', 'heavy_exclamation_mark', 'bangbang', 'interrobang', 'o', 'heavy_multiplication_x', 'heavy_plus_sign', 'heavy_minus_sign', 'heavy_division_sign', 'white_flower', '100', 'heavy_check_mark', 'ballot_box_with_check', 'radio_button', 'link', 'curly_loop', 'wavy_dash', 'part_alternation_mark', 'trident', 'black_square', 'white_square', 'white_check_mark', 'black_square_button', 'white_square_button', 'black_circle', 'white_circle', 'red_circle', 'large_blue_circle', 'large_blue_diamond', 'large_orange_diamond', 'small_blue_diamond', 'small_orange_diamond', 'small_red_triangle', 'small_red_triangle_down', 'shipit'];
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = emojiList;
+  }
+  return emojiList;
+}.call(this));
+Emoji = (function(){
+  var iterator, emojiList, emoji;
+  if (typeof module != 'undefined' && module !== null) {
+    iterator = require('./iterator');
+    emojiList = require('./emoji-list');
+  } else {
+    iterator = Iterator;
+    emojiList = EmojiList;
+  }
+  emoji = function(text){
+    var regex;
+    regex = /:([a-z0-9_+-]+):/g;
+    return iterator(text, regex, function(it){
+      var matched, e;
+      matched = it[0], e = it[1];
+      if (in$(e, emojiList)) {
+        return "<img class='emoji' title='" + matched + "' alt='" + matched + "' src=\n'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/" + e + ".png'\nwidth='20' height='20' align='absmiddle'>";
+      } else {
+        return matched;
+      }
+    });
+  };
+  if (typeof module != 'undefined' && module !== null) {
+    module.exports = emoji;
+  }
+  return emoji;
 }.call(this));
 marked.setOptions({
   gfm: true,
@@ -6065,18 +6063,8 @@ marked.setOptions({
   }
 });
 format = function(text){
-  var emoji;
   text = Linkify.all(text, context);
-  emoji = /:[a-z0-9_+-]+:/g;
-  text = text.replace(emoji, function(str){
-    var name;
-    name = str.substr(1, str.length - 2);
-    if (in$(name, emojiList)) {
-      return "<img class='emoji' title='" + str + "' alt='" + str + "' src=\n'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/" + name + ".png'\nwidth='20' height='20' align='absmiddle'>";
-    } else {
-      return str;
-    }
-  });
+  text = Emoji(text);
   return marked(text);
 };
 showPreview = localStorage.getItem('LiveMarkdownPreview');
@@ -6102,7 +6090,7 @@ x$ = button = d.createElement('a');
 x$.className = 'js-toggle-live-preview tooltipped leftwards';
 x$.href = '#';
 x$.setAttribute('original-title', 'Live Preview');
-x$.addEventListener('click', togglePreview, false);
+x$.addEventListener('click', togglePreview);
 y$ = icon = d.createElement('span');
 y$.className = 'octicon octicon-live-preview';
 z$ = css = d.createElement('style');
@@ -6132,7 +6120,7 @@ updatePreview = function(){
     preview.innerHTML = format(text);
   }
 };
-textarea.addEventListener('keyup', updatePreview, false);
+textarea.addEventListener('input', updatePreview);
 function in$(x, arr){
   var i = -1, l = arr.length >>> 0;
   while (++i < l) if (x === arr[i] && i in arr) return true;
