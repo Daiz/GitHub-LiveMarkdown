@@ -2,6 +2,18 @@ Emoji = let
   
   iterator = if module? then require './iterator' else Iterator
 
+  emoji = (text) ->
+    regex = /:([a-z0-9_+-]+):/g
+    iterator text, regex, ->
+      [matched, name] = it
+      if name in emoji-list
+        """
+        <img class='emoji' title='#str' alt='#str' src=
+        'https://a248.e.akamai.net/assets.github.com/images/icons/emoji/#name.png'
+        width='20' height='20' align='absmiddle'>
+        """
+      else matched
+
   module?exports = emoji
   return emoji
 
