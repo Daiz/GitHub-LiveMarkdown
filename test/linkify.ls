@@ -1,7 +1,4 @@
-require! {
-  should: \chai .should!
-  lsc: \LiveScript
-}
+should = require \chai .should!
 
 Linkify = require '../src/linkify'
 
