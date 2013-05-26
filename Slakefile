@@ -11,9 +11,10 @@ pkg = JSON.parse cat 'package.json'
 
 sources = <[
   head.ls
-  emoji.ls
   iterator.ls
   linkify.ls
+  emoji-list.ls
+  emoji.ls
   index.ls
 ]>
 
