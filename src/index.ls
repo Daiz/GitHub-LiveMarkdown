@@ -40,7 +40,7 @@ button = d.create-element \a
   ..class-name = 'js-toggle-live-preview tooltipped leftwards'
   ..href = \#
   ..set-attribute \original-title 'Live Preview'
-  ..add-event-listener \click, toggle-preview, false
+  ..add-event-listener \click toggle-preview
 
 # create the button icon
 icon = d.create-element \span
@@ -83,4 +83,4 @@ update-preview = !->
     preview.innerHTML = format text
 
 # add event listeners for updating
-textarea.add-event-listener \input, update-preview, false
+textarea.add-event-listener \input update-preview
