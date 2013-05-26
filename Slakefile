@@ -13,6 +13,7 @@ sources = <[
   head.ls
   iterator.ls
   linkify.ls
+  emoji-list.ls
   emoji.ls
   index.ls
 ]>
