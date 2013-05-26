@@ -18,8 +18,8 @@ sources = <[
   index.ls
 ]>
 
-if not test \-d \vendor
-   mkdir \vendor
+if not test \-d \build
+   mkdir \build
 
 task \bundle 'Bundle dependencies.' !->
 
