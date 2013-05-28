@@ -8,7 +8,6 @@ Tipsy = let
 
   show-tip = ->
     el = it.target.parent-node
-    console.log el
     tip = tipsy el
 
   destroy-tip = ->
@@ -52,9 +51,6 @@ Tipsy = let
     | \s => top: el-top - tip-height - opts.offset, left: el-left + el-width / 2 - tip-width / 2
     | \e => top: el-top + el-height / 2 - tip-height / 2, left: el-left - tip-width - opts.offset
     | \w => top: el-top + el-height / 2 - tip-height / 2, left: el-left + el-width + opts.offset
-
-    console.log el-top, el-left, el-width, el-height, tip-width, tip-height
-    console.log pos
 
     tip.style
       ..top = pos.top + \px
