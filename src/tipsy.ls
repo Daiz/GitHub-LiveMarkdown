@@ -10,6 +10,7 @@
 Tipsy = let
   
   d = document
+  de = d.document-element
 
   add-tip = !->
     it.add-event-listener \mouseover show-tip
@@ -48,8 +49,8 @@ Tipsy = let
     d.body.insert-before tip, d.body.first-child 
 
     el-rect = el.get-bounding-client-rect!
-    el-top  = el-rect.top + 1
-    el-left = el-rect.left
+    el-top  = el-rect.top + 1 + window.page-y-offset - de.client-top
+    el-left = el-rect.left + window.page-x-offset - de.client-left
 
     el-width  = el.offset-width
     el-height = el.offset-height
