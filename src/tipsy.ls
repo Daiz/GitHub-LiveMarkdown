@@ -2,15 +2,15 @@ Tipsy = let
   
   d = document
 
-  add-tip = ->
+  add-tip = !->
     it.add-event-listener \mouseover show-tip
     it.add-event-listener \mouseout  destroy-tip
 
-  show-tip = ->
+  show-tip = !->
     el = it.target.parent-node
-    tip = tipsy el
+    tipsy el
 
-  destroy-tip = ->
+  destroy-tip = !->
     tip = d.body.query-selector \.tipsy
     d.body.remove-child tip
 
@@ -19,7 +19,7 @@ Tipsy = let
     text: 'Live&nbsp;Preview'
     offset: 0
 
-  tipsy = (el, opts = ^^default-opts) ->
+  tipsy = (el, opts = ^^default-opts) !->
     
     tip = d.create-element \div
       ..class-name = "tipsy tipsy-#{opts.gravity}"
@@ -55,8 +55,6 @@ Tipsy = let
     tip.style
       ..top = pos.top + \px
       ..left = pos.left + \px
-
-    tip
 
   module?exports = add-tip
   add-tip
