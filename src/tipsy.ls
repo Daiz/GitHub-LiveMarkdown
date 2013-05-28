@@ -1,3 +1,12 @@
+# Tipsy module
+# ============
+# This module is a very lightweight and stripped-down version of tipsy[1].
+# It provides a tooltip for the Live Preview button in the edit box in the
+# style of GitHub's other tooltips. Functionality can be extended in the
+# future if necessary.
+#
+# [1] https://github.com/jaz303/tipsy
+
 Tipsy = let
   
   d = document
@@ -19,7 +28,9 @@ Tipsy = let
     text: 'Live&nbsp;Preview'
     offset: 0
 
-  tipsy = (el, opts = ^^default-opts) !->
+  tipsy = !(el, opts = ^^default-opts) ->
+
+    # https://github.com/jaz303/tipsy/blob/master/src/javascripts/jquery.tipsy.js#L36-L58
     
     tip = d.create-element \div
       ..class-name = "tipsy tipsy-#{opts.gravity}"
