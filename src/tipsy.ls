@@ -2,6 +2,16 @@ Tipsy = let
   
   d = document
 
+  show-tip = ->
+    el = it.target
+    tip = el.query-selector \.tipsy
+    tip.style.display = \block
+
+  hide-tip = ->
+    el = it.target
+    tip = el.query-selector \.tipsy
+    tip.style.display = \none
+
   default-opts =
     gravity: \e
     text: 'Live Preview'
@@ -22,7 +32,7 @@ Tipsy = let
         ..left = 0
         ..display = \none
 
-    d.body.append-child tip
+    el.append-child tip
 
     el-top  = el.offset-top
     el-left = el-offset-left
@@ -41,6 +51,9 @@ Tipsy = let
 
     tip.style
       {..top, ..left} = pos
+
+    el.add-event-listener \mouseover show-tip
+    el.add-event-listener \mouseout  hide-tip
 
 
 
