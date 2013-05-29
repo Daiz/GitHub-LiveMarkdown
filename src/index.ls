@@ -55,19 +55,13 @@ css-pre = d.create-element \style
   ..class-name = \live-preview-code-styling
   ..text-content = \INLINE_PRE_CSS
 
-# create the script element
-js = d.create-element \script
-  ..src = \INLINE_JS
-
-# append initial elements to appropriate places
 head
   ..append-child css
   ..append-child css-pre
 
 button.append-child icon
 content.insert-before button, content.first-child
-
-d.body.append-child js
+Tipsy button
 
 # create preview element
 preview-bucket = d.query-selector \.preview-content
